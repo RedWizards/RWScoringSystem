@@ -1,4 +1,5 @@
 <?php
+	header('Content-type: application/json');
 	require_once('connection.php');
 
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -10,7 +11,7 @@
 			echo "SELECT failed: (" . $conn->errno . ") " . $conn->error;
 		}
 		else{
-			echo("Success!");
+			echo json_encode($res);
 		}
 	}
 	else{
