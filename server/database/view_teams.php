@@ -5,19 +5,19 @@
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     	$event_id = $_GET['event_id'];
 
-		$sql = "CALL view_criteria('".$event_id."')";
+		$sql = "CALL view_teams('".$event_id."')";
 
 		if(!($res = $conn->query($sql))){
 			echo "SELECT failed: (" . $conn->errno . ") " . $conn->error;
 		}
 		else{
-			$criteria = array();
+			$teams = array();
 
 			while($row = $res->fetch_assoc()){
-				array_push($criteria, $row);
+				array_push($teams, $row);
 			}
 
-			echo json_encode($criteria);
+			echo json_encode($teams);
 		}
 	}
 	else{
