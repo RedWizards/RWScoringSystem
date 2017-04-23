@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2017 at 05:24 PM
+-- Generation Time: Apr 23, 2017 at 09:43 AM
 -- Server version: 5.6.26-log
 -- PHP Version: 7.0.4
 
@@ -201,6 +201,22 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `view_members` (IN `in_team_id` INT(
 	WHERE team_id = in_team_id;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `view_score` (IN `in_project_id` INT)  BEGIN
+	SELECT
+		c.criteria_desc,
+        s.score
+	FROM
+		scores s, 
+		project p,
+        event e,
+        criteria c
+	WHERE s.project_id = in_project_id
+			AND p.project_id = s.project_id
+            AND e.event_id = p.event_id
+            AND c.event_id = p.event_id
+            AND s.criteria_id = c.criteria_id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `view_teams` (IN `in_event_id` INT(11))  BEGIN
 	SELECT t.team_id, t.team_name, p.project_name, p.project_type, p.short_desc, p.long_desc
     FROM team t,
@@ -225,6 +241,16 @@ CREATE TABLE `criteria` (
   `criteria_weight` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `criteria`
+--
+
+INSERT INTO `criteria` (`criteria_id`, `event_id`, `criteria_desc`, `criteria_weight`) VALUES
+(2, 2, 'Innovation', 25),
+(3, 2, 'Technical Difficulty', 25),
+(4, 2, 'Business Impact', 25),
+(5, 2, 'Demo', 25);
+
 -- --------------------------------------------------------
 
 --
@@ -239,6 +265,14 @@ CREATE TABLE `event` (
   `event_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `event_name`, `event_host`, `event_desc`, `event_date`) VALUES
+(2, 'Red Wizard OJT', NULL, 'Sample Event', '2017-04-19 01:18:30'),
+(3, 'UHAC FINAL PITCHING', 'UNIONBANK', 'UHAC Series Grand Champion', '2017-04-19 12:46:02');
+
 -- --------------------------------------------------------
 
 --
@@ -250,6 +284,16 @@ CREATE TABLE `judge` (
   `event_id` int(11) DEFAULT NULL,
   `judge_name` varchar(45) DEFAULT 'Anonymous'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `judge`
+--
+
+INSERT INTO `judge` (`judge_id`, `event_id`, `judge_name`) VALUES
+(2, 2, 'Redentor Periabras'),
+(4, 2, 'Elaine Cedillo'),
+(5, 2, 'Denise Pantig'),
+(6, 2, 'Tonichi Dela Cruz');
 
 -- --------------------------------------------------------
 
@@ -265,6 +309,14 @@ CREATE TABLE `participants` (
   `participant_email` varchar(45) DEFAULT NULL,
   `participant_contactNo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `participants`
+--
+
+INSERT INTO `participants` (`participant_id`, `team_id`, `participant_firstName`, `participant_lastName`, `participant_email`, `participant_contactNo`) VALUES
+(1, 2, 'Redentor', 'Periabras', 'redperiabras@gmail.com', '09278572198'),
+(5, 2, 'Christian', 'Cimbracruz', 'christiancimbra@gmail.com', '09093291283');
 
 -- --------------------------------------------------------
 
@@ -282,6 +334,17 @@ CREATE TABLE `project` (
   `long_desc` varchar(800) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`project_id`, `event_id`, `team_id`, `project_name`, `project_type`, `short_desc`, `long_desc`) VALUES
+(2, 2, 2, 'PLDT Bot', 'Messenger Bot', 'meh', 'bah blah'),
+(3, 2, 5, 'Scoring System', 'Web', 'haha', 'ohhh'),
+(4, 2, 6, 'Music App', 'Web', 'lalala', 'hahaha'),
+(5, 2, 5, 'Leslee', 'Web', '***', '****'),
+(6, 2, 6, 'Kuya TEam', 'web', '***', '****');
+
 -- --------------------------------------------------------
 
 --
@@ -296,6 +359,24 @@ CREATE TABLE `scores` (
   `score` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `scores`
+--
+
+INSERT INTO `scores` (`score_id`, `judge_id`, `criteria_id`, `project_id`, `score`) VALUES
+(5, 2, 3, 2, 20),
+(6, 2, 4, 2, 15),
+(7, 2, 5, 2, 10),
+(8, 2, 2, 2, 15),
+(9, 6, 2, 3, 25),
+(10, 6, 4, 3, 25),
+(11, 6, 5, 3, 25),
+(12, 6, 3, 3, 25),
+(14, 2, 2, 5, 10),
+(15, 2, 3, 5, 5),
+(16, 2, 4, 5, 3),
+(18, 2, 5, 5, 20);
+
 -- --------------------------------------------------------
 
 --
@@ -306,6 +387,16 @@ CREATE TABLE `team` (
   `team_id` int(11) NOT NULL,
   `team_name` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `team`
+--
+
+INSERT INTO `team` (`team_id`, `team_name`) VALUES
+(2, 'Harambeats'),
+(5, 'Team Mamba'),
+(6, 'WhiteCloak'),
+(7, 'Team Arandia');
 
 --
 -- Indexes for dumped tables
