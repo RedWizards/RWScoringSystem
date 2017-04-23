@@ -4,24 +4,20 @@
 	app.controller('score-ctrl', function($scope) {
 		
 		$scope.hasActive = false;
-		
-		var request = $.ajax({
-		  url: '../../database/initial_data.php',
-		  type: 'GET',
-		  data: {
-		  	judge_id: 2
-		  },
-		  dataType: 'json'
-		});
+		$scope.teams = [];
 
-		request.done(function(data) {
-			$scope.teams = JSON.stringify(data, null, 4);
-			console.log($scope.teams);
-		});
+		$.ajax({
+	        url : '../../database/initial_data.php',
+			type : 'GET',
+			data : {
+			  	judge_id: 2
+			},
+			dataType : 'json',
+        }).done(function(data) {
+         	$scope.teams = data;
+        });
 
-		request.fail(function(jqXHR, textStatus) {
-		   alert( "Request failed: " + textStatus );
-		});
+		console.log($scope.teams);
 
 		$scope.updateScore = function(team) {
 			team.total = 0;
