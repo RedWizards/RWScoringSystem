@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 20, 2017 at 04:50 AM
+-- Generation Time: Apr 22, 2017 at 05:24 PM
 -- Server version: 5.6.26-log
 -- PHP Version: 7.0.4
 
@@ -29,6 +29,71 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `add_participant` (IN `in_team_id` I
     VALUES(in_team_id, in_participant_firstName, in_participant_lastname, in_participant_email, in_participant_contactNo);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_project` (IN `in_team_id` INT, IN `in_event_id` INT, IN `in_project_name` VARCHAR(45), IN `in_project_type` VARCHAR(45), IN `in_short_desc` VARCHAR(160), IN `in_long_desc` VARCHAR(800))  BEGIN
+	INSERT INTO project(
+        team_id,
+        event_id,
+        project_name,
+        project_type,
+        short_desc,
+        long_desc
+    )
+    VALUES(
+        in_team_id,
+        in_event_id,
+        in_project_name,
+        in_project_type,
+        in_short_desc,
+        in_long_desc
+    );
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `app_scoresheet` (IN `in_project_id` INT)  BEGIN
+	SET @sql = NULL;
+
+	SELECT
+		GROUP_CONCAT(DISTINCT
+			CONCAT(
+				'MAX(IF(criteria_desc = ''', criteria_desc,''', score, NULL)) AS ''', criteria_desc ,"'"
+			)
+		) INTO @sql
+	FROM (
+		(SELECT c.criteria_desc
+		FROM
+			criteria c,
+			scores s
+		WHERE s.project_id = in_project_id
+		AND c.criteria_id = s.criteria_id)
+		AS event_criteria
+	);
+    
+	SET @sql = (
+		CONCAT('
+			SELECT judge_id, judge_name,', @sql ,'
+			FROM
+				(
+					SELECT j.judge_id, j.judge_name, c.criteria_desc, s.score
+					FROM
+						judge j,
+						criteria c,
+						scores s
+					WHERE
+						s.project_id = ', in_project_id ,'
+					AND c.criteria_id = s.criteria_id
+					AND j.judge_id = s.judge_id
+					ORDER BY judge_name, criteria_desc
+
+				) AS raw_scores
+			GROUP BY
+				judge_id
+		')
+	);
+
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_criteria` (IN `in_event_id` INT(11), IN `in_criteria_desc` VARCHAR(45), IN `in_criteria_weight` INT(11))  BEGIN
 	INSERT INTO criteria(event_id, criteria_desc, criteria_weight)
 		VALUES(in_event_id, in_criteria_desc, in_criteria_weight);
@@ -44,27 +109,78 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_judge` (IN `in_event_id` INT
 		VALUES(in_event_id, in_judge_name);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `give_score` (IN `in_judge_id` INT(11), IN `in_criteria_id` INT(11), IN `in_team_id` INT(11), IN `in_score` INT(11))  BEGIN
-	INSERT INTO scores(judge_id, criteria_id, team_id, score)
-		VALUES(in_judge_id, in_criteria_id, in_team_id, in_score);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_average_score` (IN `in_team_id` INT)  BEGIN
+	SELECT SUM(score)
+    FROM scores
+    WHERE team_id = in_team_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `register_team` (IN `in_event_id` INT(11), IN `in_team_name` VARCHAR(45), IN `in_project_name` VARCHAR(45), IN `in_project_type` VARCHAR(45), IN `in_short_description` VARCHAR(45), IN `in_long_description` VARCHAR(45))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `give_score` (IN `in_judge_id` INT(11), IN `in_criteria_id` INT(11), IN `in_project_id` INT(11), IN `in_score` INT(11))  BEGIN
+	INSERT INTO scores(judge_id, criteria_id, project_id, score)
+		VALUES(in_judge_id, in_criteria_id, in_project_id, in_score);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `judge_scoresheet` (IN `in_judge_id` INT)  BEGIN
+	SET @sql = NULL;
+
+	SELECT 
+    GROUP_CONCAT(DISTINCT CONCAT('MAX(IF(criteria_desc = \'',
+                criteria_desc,
+                '\', score, NULL)) AS \'',
+                criteria_desc,
+                '\''))
+INTO @sql FROM
+    ((SELECT 
+        c.criteria_desc
+    FROM
+        criteria c, judge j, event e
+    WHERE
+        j.judge_id = in_judge_id
+            AND e.event_id = j.event_id
+            AND c.event_id = j.event_id) AS event_criteria);
+    
+	SET @sql = (
+		CONCAT('
+			SELECT project_id, project_name, team_id, team_name,', @sql ,'
+			FROM
+				(
+					SELECT DISTINCT
+						p.project_id,
+						p.project_name,
+						t.team_id,
+						t.team_name,
+						c.criteria_desc,
+						s.score
+					FROM
+						scores s,
+						criteria c,
+						judge j,
+						project p,
+						team t
+					WHERE
+						s.judge_id = ', in_judge_id ,'
+							AND p.project_id = s.project_id
+							AND t.team_id = p.team_id
+							AND c.event_id = p.event_id
+							AND s.criteria_id = c.criteria_id
+					ORDER BY project_id , team_id, criteria_desc
+				) AS raw_scores
+			GROUP BY
+				project_id
+		')
+	);
+
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `register_team` (IN `in_team_name` VARCHAR(45))  BEGIN
     INSERT INTO team(
-		event_id,
-        team_name,
-        project_name,
-        project_type,
-        short_description,
-        long_description
+        team_name
     )
     VALUES(
-		in_event_id,
-        in_team_name,
-        in_project_name,
-        in_project_type,
-        in_short_description,
-        in_long_description
+        in_team_name
     );
 END$$
 
@@ -81,14 +197,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `view_judges` (IN `in_event_id` INT(
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `view_members` (IN `in_team_id` INT(11))  BEGIN
-	SELECT * FROM participants
+	SELECT participant_id, participant_firstName, participant_lastName, participant_email, participant_contactNo FROM participants
 	WHERE team_id = in_team_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `view_teams` (IN `in_event_id` INT(11))  BEGIN
-	SELECT team_id, team_name, project_name, project_type, short_description, long_description
-    FROM team
-    WHERE event_id = in_event_id;
+	SELECT t.team_id, t.team_name, p.project_name, p.project_type, p.short_desc, p.long_desc
+    FROM team t,
+		project p
+    WHERE 
+		p.event_id = in_event_id
+    AND t.team_id = p.team_id;
 END$$
 
 DELIMITER ;
@@ -106,16 +225,6 @@ CREATE TABLE `criteria` (
   `criteria_weight` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `criteria`
---
-
-INSERT INTO `criteria` (`criteria_id`, `event_id`, `criteria_desc`, `criteria_weight`) VALUES
-(2, 2, 'Innovation', 25),
-(3, 2, 'Technical Difficulty', 25),
-(4, 2, 'Business Impact', 25),
-(5, 2, 'Demo', 25);
-
 -- --------------------------------------------------------
 
 --
@@ -130,16 +239,6 @@ CREATE TABLE `event` (
   `event_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `event`
---
-
-INSERT INTO `event` (`event_id`, `event_name`, `event_host`, `event_desc`, `event_date`) VALUES
-(1, '0', NULL, '0', '2017-04-19 01:17:53'),
-(2, 'Red Wizard OJT', NULL, 'Sample Event', '2017-04-19 01:18:30'),
-(3, 'UHAC FINAL PITCHING', 'UNIONBANK', 'UHAC Series Grand Champion', '2017-04-19 12:46:02'),
-(4, '', '', '', '2017-04-19 13:07:29');
-
 -- --------------------------------------------------------
 
 --
@@ -151,16 +250,6 @@ CREATE TABLE `judge` (
   `event_id` int(11) DEFAULT NULL,
   `judge_name` varchar(45) DEFAULT 'Anonymous'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `judge`
---
-
-INSERT INTO `judge` (`judge_id`, `event_id`, `judge_name`) VALUES
-(2, 2, 'Redentor Periabras'),
-(4, 2, 'Elaine Cedillo'),
-(5, 2, 'Denise Pantig'),
-(6, 2, 'Tonichi Dela Cruz');
 
 -- --------------------------------------------------------
 
@@ -177,13 +266,21 @@ CREATE TABLE `participants` (
   `participant_contactNo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `participants`
+-- Table structure for table `project`
 --
 
-INSERT INTO `participants` (`participant_id`, `team_id`, `participant_firstName`, `participant_lastName`, `participant_email`, `participant_contactNo`) VALUES
-(1, 2, 'Redentor', 'Periabras', 'redperiabras@gmail.com', '09278572198'),
-(5, 2, 'Christian', 'Cimbracruz', 'christiancimbra@gmail.com', '09093291283');
+CREATE TABLE `project` (
+  `project_id` int(11) NOT NULL,
+  `event_id` int(11) DEFAULT NULL,
+  `team_id` int(11) DEFAULT NULL,
+  `project_name` varchar(45) DEFAULT NULL,
+  `project_type` varchar(45) DEFAULT NULL,
+  `short_desc` varchar(160) DEFAULT NULL,
+  `long_desc` varchar(800) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -195,17 +292,9 @@ CREATE TABLE `scores` (
   `score_id` int(11) NOT NULL,
   `judge_id` int(11) DEFAULT NULL,
   `criteria_id` int(11) DEFAULT NULL,
-  `team_id` int(11) DEFAULT NULL,
+  `project_id` int(11) DEFAULT NULL,
   `score` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `scores`
---
-
-INSERT INTO `scores` (`score_id`, `judge_id`, `criteria_id`, `team_id`, `score`) VALUES
-(2, 2, 2, 2, 25),
-(3, 6, 3, 2, 25);
 
 -- --------------------------------------------------------
 
@@ -215,23 +304,8 @@ INSERT INTO `scores` (`score_id`, `judge_id`, `criteria_id`, `team_id`, `score`)
 
 CREATE TABLE `team` (
   `team_id` int(11) NOT NULL,
-  `event_id` int(11) DEFAULT NULL,
-  `team_name` varchar(45) DEFAULT NULL,
-  `project_name` varchar(45) DEFAULT NULL,
-  `project_type` varchar(45) DEFAULT NULL,
-  `short_description` varchar(45) DEFAULT NULL,
-  `long_description` varchar(45) DEFAULT NULL
+  `team_name` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `team`
---
-
-INSERT INTO `team` (`team_id`, `event_id`, `team_name`, `project_name`, `project_type`, `short_description`, `long_description`) VALUES
-(2, 2, NULL, NULL, NULL, NULL, NULL),
-(5, 2, 'Team Mamba', NULL, NULL, NULL, NULL),
-(6, 2, 'WhiteCloak', 'Heat Alert', 'Web App', 'meh hehe', 'meh hehe'),
-(8, 2, 'Harambeats', 'Heat Alert', 'Web App', 'meh hehe', 'blah blah');
 
 --
 -- Indexes for dumped tables
@@ -265,20 +339,27 @@ ALTER TABLE `participants`
   ADD KEY `participant_team_idx` (`team_id`);
 
 --
+-- Indexes for table `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`project_id`),
+  ADD KEY `project_team_idx` (`team_id`),
+  ADD KEY `project_event_idx` (`event_id`);
+
+--
 -- Indexes for table `scores`
 --
 ALTER TABLE `scores`
   ADD PRIMARY KEY (`score_id`),
   ADD KEY `scores_judge_idx` (`judge_id`),
-  ADD KEY `scores_team_idx` (`team_id`),
-  ADD KEY `scores_criteria_idx` (`criteria_id`);
+  ADD KEY `scores_criteria_idx` (`criteria_id`),
+  ADD KEY `scores_project_idx` (`project_id`);
 
 --
 -- Indexes for table `team`
 --
 ALTER TABLE `team`
-  ADD PRIMARY KEY (`team_id`),
-  ADD KEY `team_event_idx` (`event_id`);
+  ADD PRIMARY KEY (`team_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -293,7 +374,7 @@ ALTER TABLE `criteria`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `judge`
 --
@@ -305,15 +386,20 @@ ALTER TABLE `judge`
 ALTER TABLE `participants`
   MODIFY `participant_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `project`
+--
+ALTER TABLE `project`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `scores`
 --
 ALTER TABLE `scores`
-  MODIFY `score_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `score_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
@@ -337,18 +423,19 @@ ALTER TABLE `participants`
   ADD CONSTRAINT `participant_team` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `project`
+--
+ALTER TABLE `project`
+  ADD CONSTRAINT `project_event` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `project_team` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `scores`
 --
 ALTER TABLE `scores`
   ADD CONSTRAINT `scores_criteria` FOREIGN KEY (`criteria_id`) REFERENCES `criteria` (`criteria_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `scores_judge` FOREIGN KEY (`judge_id`) REFERENCES `judge` (`judge_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `scores_team` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `team`
---
-ALTER TABLE `team`
-  ADD CONSTRAINT `team_event` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `scores_project` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

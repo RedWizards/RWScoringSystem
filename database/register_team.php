@@ -2,16 +2,10 @@
 	require_once('connection.php');
 
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    	$judge_id = $_GET['judge_id'];
-		$criteria_id = $_GET['criteria_id'];
-		$team_id = $_GET['team_id'];
-		$score = $_GET['score'];
+		$team_name = $_GET['team_name'];
 
-		$sql = "CALL give_score('".
-			$judge_id."','".
-			$criteria_id."','".
-			$team_id."','".
-			$score."')";
+		$sql = "CALL register_team('".
+			$team_name."')";
 
 		if(!$conn->query($sql)){
 			echo "CALL failed: ( ".$conn->errno." ) " . $conn->error;
