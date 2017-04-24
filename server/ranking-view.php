@@ -28,58 +28,30 @@
 		<!-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
 
 		<link rel="stylesheet" href="../assets/css/scoring-system.css">
-
+		<!--
 		<link rel="stylesheet" href="../assets/css/style.css">
-
+		-->
 		<script src="../assets/js/angular.min.js"></script>
 
-		<script src="../assets/js/scoring-system.js"></script>	
+		<script src="../assets/js/ranking-view.js"></script>	
 
 	</head>
+	
 	<body>
 		<header class="container">
 			<div class="row text-center">
-				<div class="col-md-3" id="head-name">
-					EVENTS
+				<div class="col-md-12" id="head-name">
+					RANKING OF TEAMS
 				</div>
-		
-				<div class="col-md-3">
-					<button class="btn btn-default" id="new-event-btn">NEW EVENT</button>
-				</div>
-				
 			</div>
 			
 		</header>
 		
-		<section class="container">
+		<section class="container" background-color>
 		
-			<div id="events-record" ng-app="score-app" ng-controller="score-ctrl" ng-init="init()">
+			<div id="events-record" ng-app="ranking-view" ng-controller="view-ctrl">
 
-				<!-- Shows when there is no record of events -->
-				<div id="no-event-record" ng-hide="hasRecord">
-					<i>No Events Recorded</i>
-				</div>
 				
-				<!-- Shows the list of events recorded -->
-				<div class="align-center" id="event-list" ng-show="hasRecord">
-					<div id="accordion">
-						<div class="panel panel-default" ng-repeat="record in records">
-							  <div class="panel-heading">
-								<h4 class="panel-title">
-								  <a id="" href="#"><b>{{record.event_name}}</b></a><small><i> by {{record.event_host}}</i></small>
-								  <a data-toggle="collapse" data-parent="#accordion" href="#{{record.event_id}}" title="Event Description"><span class="glyphicon glyphicon-info-sign pull-right"></span></a>
-								</h4>
-							  </div>
-							  <div id="{{record.event_id}}" class="panel-collapse collapse">
-								<div class="panel-body">
-									<h6>{{record.event_date}}</h6>
-									<br/>
-									<h5>{{record.event_desc}}</h5>
-								</div>
-							  </div>
-						</div>
-					</div>
-				</div>
 				
 			</div>
 			
