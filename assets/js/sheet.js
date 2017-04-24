@@ -26,40 +26,112 @@
 		$scope.isActive = false;
 	
 		$scope.teams = [
-			{
-				"name": "Harambeats",
-				"criteria": [
-					{"criteria_id": 1, "name": "Technical Difficulty", "weight": 25, "score": 0, "description": "Includes the technicality of the application"},
-					{"criteria_id": 2, "name": "Innovation", "weight": 25, "score": 0, "description": "Inno innov inoova innvat innovation"},
-					{"criteria_id": 3, "name": "Business Impact", "weight": 25, "score": 0, "description": "Business impact impact impact impact"},
-					{"criteria_id": 4, "name": "Demo", "weight": 25, "score": 0, "description": "Demoooooooooooooooooooooooo"}
-				],
-				"total": 0,
-				"isActive": false
-			},
-			{
-				"name": "Team Mamba",
-				"criteria": [
-					{"criteria_id": 1, "name": "Technical Difficulty", "weight": 25, "score": 0, "description": "Includes the technicality of the application"},
-					{"criteria_id": 2, "name": "Innovation", "weight": 25, "score": 0, "description": "Inno innov inoova innvat innovation"},
-					{"criteria_id": 3, "name": "Business Impact", "weight": 25, "score": 0, "description": "Business impact impact impact impact"},
-					{"criteria_id": 4, "name": "Demo", "weight": 25, "score": 0, "description": "Demoooooooooooooooooooooooo"}
-				],
-				"total": 0,
-				"isActive": false
-			},
-			{
-				"name": "Team Arandia",
-				"criteria": [
-					{"criteria_id": 1, "name": "Technical Difficulty", "weight": 25, "score": 0, "description": "Includes the technicality of the application"},
-					{"criteria_id": 2, "name": "Innovation", "weight": 25, "score": 0, "description": "Inno innov inoova innvat innovation"},
-					{"criteria_id": 3, "name": "Business Impact", "weight": 25, "score": 0, "description": "Business impact impact impact impact"},
-					{"criteria_id": 4, "name": "Demo", "weight": 25, "score": 0, "description": "Demoooooooooooooooooooooooo"}
-				],
-				"total": 0,
-				"isActive": false
-			}
-		];
+					{
+						"name": "Harambeats",
+						"criteria": [
+							{
+								"criteria_id": 1,
+								"name": "Technical Difficulty",
+								"weight": 25,
+								"score": 0,
+								"description": "Includes the technicality of the application"
+							},
+							{
+								"criteria_id": 2,
+								"name": "Innovation",
+								"weight": 25,
+								"score": 0, 
+								"description": 
+								"Inno innov inoova innvat innovation"
+							},
+							{
+								"criteria_id": 3,
+								"name": "Business Impact",
+								"weight": 25,
+								"score": 0, 
+							    "description": "Business impact impact impact impact"
+							},
+							{
+								"criteria_id": 4, 
+								"name": "Demo",
+								"weight": 25, 
+								"score": 0, 
+								"description": "Demoooooooooooooooooooooooo"
+							}
+						],
+						"total": 0,
+						"isActive": false
+					},
+					{
+						"name": "Team Mamba",
+						"criteria": [
+							{
+								"criteria_id": 1, "name": 
+								"Technical Difficulty", 
+								"weight": 25, "score": 0, 
+								"description": "Includes the technicality of the application"
+							},
+							{
+								"criteria_id": 2, 
+								"name": "Innovation", 
+								"weight": 25, 
+								"score": 0, 
+								"description": "Inno innov inoova innvat innovation"
+							},
+							{
+								"criteria_id": 3, 
+								"name": "Business Impact", 
+								"weight": 25, 
+								"score": 0, 
+								"description": "Business impact impact impact impact"
+							},
+							{
+								"criteria_id": 4, 
+								"name": "Demo", 
+								"weight": 25, 
+								"score": 0, 
+								"description": "Demoooooooooooooooooooooooo"
+							}
+						],
+						"total": 0,
+						"isActive": false
+					},
+					{
+						"name": "Team Arandia",
+						"criteria": [
+							{
+								"criteria_id": 1, "name": 
+								"Technical Difficulty", 
+								"weight": 25, 
+								"score": 0, 
+								"description": "Includes the technicality of the application"
+							},
+							{
+								"criteria_id": 2, 
+								"name": "Innovation", 
+								"weight": 25, 
+								"score": 0, 
+								"description": "Inno innov inoova innvat innovation"
+							},
+							{
+								"criteria_id": 3, 
+								"name": "Business Impact", 
+								"weight": 25, 
+								"score": 0, 
+								"description": "Business impact impact impact impact"
+							},
+							{
+								"criteria_id": 4, 
+								"name": "Demo", 
+								"weight": 25, 
+								"score": 0, 
+								"description": "Demoooooooooooooooooooooooo"
+							}
+						],
+						"total": 0,
+						"isActive": false
+					}
+				];
 		
 		$scope.updateScore = function(team) {
 			team.total = 0;

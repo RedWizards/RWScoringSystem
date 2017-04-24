@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	$_SESSION['judge_id'] = 1; 
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
