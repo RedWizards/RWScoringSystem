@@ -1,95 +1,96 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Red Wizards - Scoring System</title>
-    
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
+	<head>
+		<title>Scoring System</title>
+		<!--
+		<link rel="icon" href="images/icon.ico" type="image/png" sizes="32x32">
+		-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Jquery -->
-    <script src="./assets/js/jquery.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
-    
-    <!-- Tether JS -->
-    <script src="./assets/js/tether.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script> -->
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
 
-    <!-- Bootstrap JS -->
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
+		<!-- Jquery -->
+		<script src="../assets/js/jquery.min.js"></script>
+		<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
+		
+		<!-- Tether JS -->
+		<script src="../assets/js/tether.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script> -->
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
-    <!-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+		<!-- Bootstrap JS -->
+		<script src="../assets/js/bootstrap.min.js"></script>
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
 
-    <!-- Custom CSS -->
-    <!-- <link href="./assets/css/hover.css" rel="stylesheet"> -->
-    <link href="./assets/css/styles.css" rel="stylesheet">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+		<!-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
 
-    <style type="text/css" media="screen">
-            
-    </style>
-</head>
-<body>
-    <header id="header" class="">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/RWScoringSystem/server/">RED WIZARDS</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li>
-                            <a href="#">Rank Board</a>
-                        </li>
-                        <li>
-                            <a href="#">Statistical Board</a>
-                        </li>
-                        <li>
-                            <a href="#">Reset</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container -->
-        </nav>
-    </header><!-- /header -->
+		<link rel="stylesheet" href="../assets/css/scoring-system.css">
 
-    <div class="container">
-        <br/>
-        <br/>
-        <br/>
-        <div class="row">
-            <form action="" class="form-control form-group">
-                <input type="text" name="eventName" value="" placeholder="Hackathon Name">
-                 <input type="text" name="eventName" value="" placeholder="Number of Team Participants">
-                <input type="textarea" name="eventDesc" value="" placeholder="Description">
-                <input type="submit" name="submit" value="SUBMIT">
-            </form>
-        </div>
-    </div>
-    
-    <footer>
-        <div class="row">
-            <div class="col-md-12 col-md-offset-4">
-                <p>Copyright &copy; Red Wizards 2017</p>
-            </div>
-        </div>
-    </footer><!-- /footer -->
-</body>
+		<link rel="stylesheet" href="../assets/css/style.css">
+
+		<script src="../assets/js/angular.min.js"></script>
+
+		<script src="../assets/js/scoring-system.js"></script>	
+
+	</head>
+	<body>
+		<header class="container">
+			<div class="row text-center">
+				<div class="col-md-3" id="head-name">
+					EVENTS
+				</div>
+		
+				<div class="col-md-3">
+					<button class="btn btn-default" id="new-event-btn">NEW EVENT</button>
+				</div>
+				
+			</div>
+			
+		</header>
+		
+		<section class="container">
+		
+			<div id="events-record" ng-app="score-app" ng-controller="score-ctrl" ng-init="init()">
+
+				<!-- Shows when there is no record of events -->
+				<div id="no-event-record" ng-hide="hasRecord">
+					<i>No Events Recorded</i>
+				</div>
+				
+				<!-- Shows the list of events recorded -->
+				<div class="align-center" id="event-list" ng-show="hasRecord">
+					<div id="accordion">
+						<div class="panel panel-default" ng-repeat="record in records">
+							  <div class="panel-heading">
+								<h4 class="panel-title">
+								  <a href="#"><b>{{record.event_name}}</b><small><i> by {{record.event_host}}</i></small></a>
+								  <a data-toggle="collapse" data-parent="#accordion" href="#{{record.event_id}}" title="Event Description"><span class="glyphicon glyphicon-info-sign pull-right"></span></a>
+								</h4>
+							  </div>
+							  <div id="{{record.event_id}}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<h6>{{record.event_date}}</h6>
+									<br/>
+									<h5>{{record.event_desc}}</h5>
+								</div>
+							  </div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+		</section>
+
+		<footer class="container text-center">
+		
+			<p><small>Powered by </small><strong>RED Wizard Events Management</strong> &copy; 2017</p>
+			
+		</footer>
+		
+	</body>
+
 </html>

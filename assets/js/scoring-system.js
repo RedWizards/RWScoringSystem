@@ -3,21 +3,10 @@
 
 	app.controller('score-ctrl', function($scope) {
 		
-		/* INSERT FUNCTION TO CHECK IF THEIR IS A RECORD
-		$scope.hasRecord = false;
-		
-		if(checkRrecord()){
-			
-		}	
-		*/
-		
 		$scope.hasRecord = false;
 		$scope.records = [];
 		
-		console.log($scope.temp);
-		
-		var records_url = 'http://localhost/redwizards/ss/api/dummyAPI.php';
-		
+		var records_url = '../database/view_events.php';
 		
 		function init() {
 			$.ajax({
@@ -30,6 +19,7 @@
 			});
 		}
 		
-		
 		init();
+
 	});
+	
