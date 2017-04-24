@@ -14,6 +14,7 @@
 			$events = array();
 
 			while($row = $res->fetch_assoc()){
+				$row['event_date'] = date("F j, Y", strtotime($row['event_date']));
 				array_push($events, $row);
 			}
 
