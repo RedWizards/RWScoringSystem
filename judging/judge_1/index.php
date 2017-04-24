@@ -31,6 +31,7 @@
 
 		<script src="../../assets/js/sheet.js"></script>	
 	</head>
+	
 	<body class="bgimg">
 		<header class="container">
 			<div class="row text-center">
@@ -45,7 +46,7 @@
 		
 			<div id="events-record">
 			
-				<div class="text-center" ng-repeat="team in teams"">
+				<div class="text-center" ng-repeat="team in teams">
 					
 					<div ng-hide="activeNow" style="padding: 2em;">
 						<button class="btn team-btn" ng-click="setScore(team)">
@@ -192,7 +193,7 @@
 						</div>
 					
 					</div>
-					
+				
 				</div>
 				<!--
 				<div id="done-style" class="text-center">
