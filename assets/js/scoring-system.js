@@ -16,7 +16,7 @@
 					$scope.hasRecord = true;
 				$scope.records = data;
 				$scope.$apply();
-			});
+			}).fail(function() { alert('request failed'); });;
 		}
 		
 		init();
