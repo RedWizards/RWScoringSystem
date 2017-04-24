@@ -1,0 +1,93 @@
+html, body{
+	height: 100%;
+	margin: 0 auto;
+}
+
+@font-face{
+	font-family: SIMPLIFICA Typeface;
+	src: url("../fonts/SIMPLIFICA Typeface.ttf");
+}
+
+@font-face{
+	font-family: Montserrat-Bold;
+	src: url("../fonts/montserrat/Montserrat-Bold.otf");
+}
+
+@font-face{	
+	font-family: Montserrat-Light;
+	src: url("../fonts/montserrat/Montserrat-Light.otf");
+}
+
+@font-face{
+	font-family: Montserrat-UltraLight;
+	src: url("../fonts/montserrat/Montserrat-UltraLight.otf");
+}
+
+@font-face{
+	font-family: Montserrat-Regular;
+	src: url("../fonts/montserrat/Montserrat-Regular.otf");
+}
+
+@font-face{
+	font-family: TradeGothic-Light;
+	src: url("../fonts/tradegothicltstdextended/TradeGothicLTStd-Light.otf");
+}
+
+@font-face{
+	font-family: TradeGothic-BoldObl;
+	src: url("../fonts/tradegothicltstdextended/TradeGothicLTStd-BoldObl.otf");
+}
+
+@font-face{
+	font-family: TradeGothic-Bold;
+	src: url("../fonts/tradegothicltstdextended/TradeGothicLTStd-BoldExt.otf");
+}
+
+@font-face{
+	font-family: TradeGothic-Bd2Obl;
+	src: url("../fonts/tradegothicltstdextended/TradeGothicLTStd-Bd2Obl.otf");
+}
+
+@font-face{
+	font-family: TradeGothic-Extended;
+	src: url("../fonts/tradegothicltstdextended/TradeGothicLTStd-Extended.otf");
+}
+
+header {
+	background-color: #3f7373;
+	margin: 0 auto;
+	padding: 50px;
+}
+
+header #head-name {
+	width: 100%;
+	color: white;
+	font-size: 90px;
+	font-family: SIMPLIFICA Typeface;
+	font-weight: bold;
+	outline: none;
+}
+
+#judge-panel{
+	height: 100%;
+}
+
+#choose-judge-text{
+	font-family: SIMPLIFICA Typeface;
+	font-size: 50px;
+	padding: 10px; 
+}
+
+.judge-style{
+	height: 100%;
+	background-color: white;
+	font-family: Montserrat-Regular;
+	font-size: 25px;
+	background-color: #e9ebee;
+	padding: 50px;
+}
+
+.judge-name{
+	font-family: SIMPLIFICA Typeface;
+	font-size: 90px;
+}
