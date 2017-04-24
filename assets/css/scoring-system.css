@@ -76,10 +76,11 @@ section {
 .sheet-div {
 	padding: 1em;
 }
-
+/*
 .team-desc {
 	margin-bottom: 2em;
 }
+*/
 
 #team-desc {
 	border: 1px dashed gray;
