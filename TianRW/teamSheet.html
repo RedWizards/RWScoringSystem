@@ -6,19 +6,20 @@
   <link rel="stylesheet" type="text/css" href="css\teamEvaluation.css">
   <script src="JS\jquery3-2-0.min.js"></script>
   <script src="JS\bootstrap.min.js"></script>
+  <script src="JS\angular.min.js"></script>
 </head>
 <body>
-	<div id="image">
+	<div>
 		<ul class="nav nav-tabs nav-justified">
 			<img src="rw.png" height="100px" width="390px">
 		</ul>
 	</div>
 	<div>
-		<ul class="nav nav-tabs nav-justified">
-			<li><a data-toggle="tab" href="#menu1">Team Arandia</a></li>
-			<li><a data-toggle="tab" href="#menu2">Team Cone</a></li>
-			<li><a data-toggle="tab" href="#menu3">Team Burton</a></li>
-		</ul>
+			<ul class="nav nav-tabs nav-justified">
+				<li><a data-toggle="tab" href="#menu1">Team Arandia</a></li>
+				<li><a data-toggle="tab" href="#menu2">Team Cone</a></li>
+				<li><a data-toggle="tab" href="#menu3">Team Burton</a></li>
+			</ul>
 	</div>
 	<div class="tab-content">
 	  <div id="menu1" class="tab-pane fade">
@@ -27,63 +28,71 @@
 				<div class="row">
 					<div class="col-md-6">
 						</br></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 35px; " align="center"> Application Information </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Application Name </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Short Description </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Long Description </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Type </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p>
+						<div id="title">		
+							<p align="center"> Application Information </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Application Name </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Kalmamity </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Application Description </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Social Application </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Type </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Weather-Social App </p>
+						</div>
 					</div>
 					<div class="col-md-6">
 						</br></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 35px;" align="center"> Total Scores </p></br>
+						<div id="title">
+							<p style="font-family: Helvetica Neue LT Std; font-size: 35px;" align="center"> Total Scores </p></br>
+						</div>
 						<div class="row">
 							<div class="col-md-6">
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 1 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 2 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 3 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 4 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 5 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 6 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 7 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 8 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 9 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 10 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 11 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 12 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 13 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 14 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 15 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 16 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 17 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 18 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 19 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 20 </p></br></br>
+								<div id="judgescores">
+									<p align="left"> Redentor Periabras </p></br>
+									<p align="left"> Prince Hari </p></br>
+									<p align="left"> Christian Cimbracruz </p></br>
+									<p align="left"> Tonichi Dela Cruz </p></br>
+									<p align="left"> Elaine Cedillo </p></br>
+									<p align="left"> Louis Concepcion </p></br>
+									<p align="left"> Jude Gaa </p></br>
+									<p align="left"> Anna Jane Matillano </p></br>
+									<p align="left"> Judge 9 </p></br>
+									<p align="left"> Judge 10 </p></br>
+									<p align="left"> Judge 11 </p></br>
+									<p align="left"> Judge 12 </p></br>
+									<p align="left"> Judge 13 </p></br>
+									<p align="left"> Judge 14 </p></br>
+									<p align="left"> Judge 15 </p></br>
+								</div>
 							</div>	
 							<div class="col-md-5">
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
+								<div id = "judgescores">
+									<p align="left"> 90% </p></br>
+									<p align="left"> 86% </p></br>
+									<p align="left"> 97% </p></br>
+									<p align="left"> 80% </p></br>
+									<p align="left"> 78% </p></br>
+									<p align="left"> 83% </p></br>
+									<p align="left"> 82% </p></br>
+									<p align="left"> 94% </p></br>
+									<p align="left"> 85% </p></br>
+									<p align="left"> 88% </p></br>
+									<p align="left"> 76% </p></br>
+									<p align="left"> 91% </p></br>
+									<p align="left"> 78% </p></br>
+									<p align="left"> 75% </p></br>
+									<p align="left"> 98% </p></br>
+								</div>
 							</div>
 						</div>							
 					</div>
@@ -98,63 +107,71 @@
 				<div class="row">
 					<div class="col-md-6">
 						</br></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 35px; " align="center"> Application Information </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Application Name </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Short Description </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Long Description </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Type </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p>
+						<div id="title">		
+							<p align="center"> Application Information </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Application Name </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Kalmamity </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Application Description </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Social Application </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Type </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Weather-Social App </p>
+						</div>
 					</div>
 					<div class="col-md-6">
 						</br></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 35px;" align="center"> Total Scores </p></br>
+						<div id="title">
+							<p style="font-family: Helvetica Neue LT Std; font-size: 35px;" align="center"> Total Scores </p></br>
+						</div>	
 						<div class="row">
 							<div class="col-md-6">
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 1 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 2 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 3 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 4 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 5 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 6 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 7 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 8 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 9 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 10 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 11 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 12 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 13 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 14 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 15 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 16 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 17 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 18 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 19 </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 20 </p></br></br>
+								<div id="judgescores">
+									<p align="left"> Redentor Periabras </p></br>
+									<p align="left"> Prince Hari </p></br>
+									<p align="left"> Christian Cimbracruz </p></br>
+									<p align="left"> Tonichi Dela Cruz </p></br>
+									<p align="left"> Elaine Cedillo </p></br>
+									<p align="left"> Louis Concepcion </p></br>
+									<p align="left"> Jude Gaa </p></br>
+									<p align="left"> Anna Jane Matillano </p></br>
+									<p align="left"> Judge 9 </p></br>
+									<p align="left"> Judge 10 </p></br>
+									<p align="left"> Judge 11 </p></br>
+									<p align="left"> Judge 12 </p></br>
+									<p align="left"> Judge 13 </p></br>
+									<p align="left"> Judge 14 </p></br>
+									<p align="left"> Judge 15 </p></br>
+								</div>
 							</div>	
 							<div class="col-md-5">
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-								<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
+								<div id = "judgescores">
+									<p align="left"> 90% </p></br>
+									<p align="left"> 86% </p></br>
+									<p align="left"> 97% </p></br>
+									<p align="left"> 80% </p></br>
+									<p align="left"> 78% </p></br>
+									<p align="left"> 83% </p></br>
+									<p align="left"> 82% </p></br>
+									<p align="left"> 94% </p></br>
+									<p align="left"> 85% </p></br>
+									<p align="left"> 88% </p></br>
+									<p align="left"> 76% </p></br>
+									<p align="left"> 91% </p></br>
+									<p align="left"> 78% </p></br>
+									<p align="left"> 75% </p></br>
+									<p align="left"> 98% </p></br>
+								</div>
 							</div>
 						</div>
 				 </div>
@@ -166,63 +183,71 @@
 				<div class="row">
 					<div class="col-md-6">
 						</br></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 35px; " align="center"> Application Information </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Application Name </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Short Description </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Long Description </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 25px; padding-left: 20px;" align="left"> Type </p>
-							<p style="font-family: Helvetica Neue LT Std; font-size: 15px; padding-left: 35px;" align="left"> SAMPLE SAMPLE </p>
+						<div id="title">		
+							<p align="center"> Application Information </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Application Name </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Kalmamity </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Application Description </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Social Application </p></br>
+						</div>	
+						<div id="headers">	
+							<p align="left"> Type </p>
+						</div>	
+						<div id="info">	
+							<p align="left"> Weather-Social App </p>
+						</div>
 					</div>
 					<div class="col-md-6">
 						</br></br>
-						<p style="font-family: Helvetica Neue LT Std; font-size: 35px;" align="center"> Total Scores </p></br>
+						<div id="title">
+							<p style="font-family: Helvetica Neue LT Std; font-size: 35px;" align="center"> Total Scores </p></br>
+						</div>
 						<div class="row">
 							<div class="col-md-6">
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 1 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 2 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 3 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 4 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 5 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 6 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 7 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 8 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 9 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 10 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 11 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 12 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 13 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 14 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 15 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 16 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 17 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 18 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 19 </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Judge 20 </p></br></br>
+								<div id="judgescores">
+									<p align="left"> Redentor Periabras </p></br>
+									<p align="left"> Prince Hari </p></br>
+									<p align="left"> Christian Cimbracruz </p></br>
+									<p align="left"> Tonichi Dela Cruz </p></br>
+									<p align="left"> Elaine Cedillo </p></br>
+									<p align="left"> Louis Concepcion </p></br>
+									<p align="left"> Jude Gaa </p></br>
+									<p align="left"> Anna Jane Matillano </p></br>
+									<p align="left"> Judge 9 </p></br>
+									<p align="left"> Judge 10 </p></br>
+									<p align="left"> Judge 11 </p></br>
+									<p align="left"> Judge 12 </p></br>
+									<p align="left"> Judge 13 </p></br>
+									<p align="left"> Judge 14 </p></br>
+									<p align="left"> Judge 15 </p></br>
+								</div>
 							</div>	
 							<div class="col-md-5">
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
-									<p style="font-family: Helvetica Neue LT Std; font-size: 25px;" align="left"> Total Score </p></br></br>
+									<div id = "judgescores">
+									<p align="left"> 90% </p></br>
+									<p align="left"> 86% </p></br>
+									<p align="left"> 97% </p></br>
+									<p align="left"> 80% </p></br>
+									<p align="left"> 78% </p></br>
+									<p align="left"> 83% </p></br>
+									<p align="left"> 82% </p></br>
+									<p align="left"> 94% </p></br>
+									<p align="left"> 85% </p></br>
+									<p align="left"> 88% </p></br>
+									<p align="left"> 76% </p></br>
+									<p align="left"> 91% </p></br>
+									<p align="left"> 78% </p></br>
+									<p align="left"> 75% </p></br>
+									<p align="left"> 98% </p></br>
+								</div>
 							</div>
 					</div>
 				 </div>

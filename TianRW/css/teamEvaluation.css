@@ -23,5 +23,35 @@
 		#image{
 			left: 1000px;
 		}
-
 		
+		#title{
+			font-family: Helvetica Neue LT Std;
+			font-size: 35px;
+		}
+		
+		#judgescores{
+			font-family: Helvetica Neue LT Std;
+			font-size: 23px;
+			padding-left: 20px;
+			color: black;
+		}
+		
+		#headers{
+			font-family: Helvetica Neue LT Std;
+			font-size: 25px;
+			padding-left: 20px;
+		}
+
+		#names{
+			font-family: Helvetica Neue LT Std; 
+			font-size: 18px; 
+			padding-left: 35px; 
+			color: black;
+		}
+		
+		#info{
+			font-family: Helvetica Neue LT Std; 
+			font-size: 18px; 
+			padding-left: 35px;
+			color: black;
+		}
