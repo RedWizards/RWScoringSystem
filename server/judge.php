@@ -37,82 +37,161 @@
 
 <body>
 
-	<header class="container-fluid">
+	<header class="container">
 		
 		<div class="row">
 		
 			<div class="col-md-12 text-center" id="head-name">
-				JUDGES
+					SCORES' SUMMARY
 			</div>
 
 		</div>
 
 	</header>
 
-	<div class="container-fluid" id="section">
+	<div class="container">
+	
 		<div class="row" id="judge-panel">
+		
 			<div class="col-md-3">
-				<h2 id="choose-judge-text">CHOOSE A JUDGE:</h2>
-				<ul class="nav nav-pills nav-stacked" id="">
-				    <li class="active"><a data-toggle="pill" href="#judge1">Judge 1</a></li>
-				    <li><a data-toggle="pill" href="#judge2">Judge 2</a></li>
-				    <li><a data-toggle="pill" href="#judge3">Judge 3</a></li>
-	    			<li><a data-toggle="pill" href="#judge4">Judge 4</a></li>
+				<h2 id="choose-judge-text">JUDGES</h2>
+				<ul class="nav nav-pills nav-stacked">
+				    <li class="active"><a data-toggle="pill" href="#judge1">Tonichi Dela Cruz</a></li>
+				    <li><a data-toggle="pill" href="#judge2">Redentor Periabras</a></li>
+				    <li><a data-toggle="pill" href="#judge3">Prince Julius</a></li>
+				    <li><a data-toggle="pill" href="#judge4">Christian Erick</a></li>
  				 </ul>
 			</div>
+			
 			<div class="col-md-9" id="col"> 
 				<div class="tab-content row text-center"  id="content">
-	    			<div id="judge1" class="tab-pane fade in active judge-style">
-	      				<p class="judge-name">JUDGE REDENTOR</p>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	    			</div>
-	    			<div id="judge2" class="tab-pane fade judge-style">
-	      				<p class="judge-name">JUDGE ARIEL</p>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	    			</div>
-	    			<div id="judge3" class="tab-pane fade judge-style">
-	      				<p class="judge-name">JUDGE TIAN</p>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	    			</div>
-	    			<div id="judge4" class="tab-pane fade judge-style">
-	      				<p class="judge-name">JUDGE PRINCE</p>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	      				<div class="h2 panel panel-default">
-	      				<div class="panel-body">Team RED</div>
-	      				</div>
-	    			</div>
-	    			</div>
+						
+						<div id="judge1" class="tab-pane fade in active judge-style" style="padding: 0 2em;">
+							<p class="judge-name">Tonichi Dela Cruz's Score Sheet</p>
+							
+							<div id="accordion" >
+							
+								<div class="panel panel-default">
+									  <div class="panel-heading">
+										<h4 class="panel-title">
+										  <a id="" href="#" class="text-left"><b>LAUREL EYE</b><small><i> by LAUREL EYE</i></small></a><span class="pull-right">88 %</span>	 	
+										  <a data-toggle="collapse" data-parent="#accordion" href="#laurel-scores" title="Event Description"></a>
+										</h4>
+									  </div>
+									  <div id="laurel-scores" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<div class="row" style="padding: 0 15em; font-size: 0.5em;">
+												
+												<div class="col-md-6 text-left">
+													<div class="row">
+														Scalability and impact
+													</div>
+													<div class="row">
+														Execution and Design
+													</div>
+													<div class="row">
+														Business Model
+													</div>
+													<div class="row">
+														Project Validation
+													</div>
+												</div>
+												
+												<div class="col-md-6 text-right">
+													<div class="row">
+														23 %
+													</div>
+													<div class="row">
+														18 %
+													</div>
+													<div class="row">
+														22 %
+													</div>
+													<div class="row">
+														23 %
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									  </div>
+								</div>
+								
+								<div class="panel panel-default">
+									  <div class="panel-heading">
+										<h4 class="panel-title">
+										  <a id="" href="#" class="text-left"><b>CHIBOT</b><small><i> by CHIBOT</i></small></a><span class="pull-right">88 %</span>	 	
+										  <a data-toggle="collapse" data-parent="#accordion" href="#laurel-scores" title="Event Description"></a>
+										</h4>
+									  </div>
+									  <div id="laurel-scores" class="panel-collapse collapse">
+										<div class="panel-body">
+											CRITERIAS
+										</div>
+									  </div>
+								</div>
+								
+								<div class="panel panel-default">
+									  <div class="panel-heading">
+										<h4 class="panel-title">
+										  <a id="" href="#" class="text-left"><b>HOOLEH</b><small><i> by INTERN</i></small></a><span class="pull-right">91 %</span>	 	
+										  <a data-toggle="collapse" data-parent="#accordion" href="#laurel-scores" title="Event Description"></a>
+										</h4>
+									  </div>
+									  <div id="laurel-scores" class="panel-collapse collapse">
+										<div class="panel-body">
+											CRITERIAS
+										</div>
+									  </div>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+						<div id="judge2" class="tab-pane fade judge-style">
+							<p class="judge-name">Redentor Periabras' Score Sheet</p>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">LAUREL EYE</div>
+							</div>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">INTERN</div>
+							</div>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">CHIBOT</div>
+							</div>
+						</div>
+						
+						<div id="judge3" class="tab-pane fade judge-style">
+							<p class="judge-name">Prince Julius' Score Sheet</p>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">LAUREL EYE</div>
+							</div>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">INTERN</div>
+							</div>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">CHIBOT</div>
+							</div>
+						</div>
+						
+						
+						<div id="judge4" class="tab-pane fade judge-style">
+							<p class="judge-name">Christian Erick' Score Sheet</p>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">LAUREL EYE</div>
+							</div>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">INTERN</div>
+							</div>
+							<div class="h4 panel panel-default">
+								<div class="panel-body">CHIBOT</div>
+							</div>
+						</div>
+						
 	    		</div>
 			</div>
+			
 		</div>
 		
 	</div>
