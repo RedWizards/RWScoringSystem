@@ -51,10 +51,17 @@
 
 		$temp_teams = $teams;	//transfer data to a temporary variable
 		$teams = [];			//reset $teams
+		$temp_criterias = $criterias; //transfer criteria data to a temporary variable
+		$criterias = [];		//reset criterias
+
+		//loop through teams
 		foreach($temp_teams as $team){
 
+			$team_id = $team->team_id;
+			$project_id = $team->project_id;
+
 			//Query all members
-			$sql = "CALL view_members(".$team->team_id.")";
+			$sql = "CALL view_members(".$team_id.")";
 			$result = $conn->query($sql);
 			if($result){
     			$members = array();
@@ -76,14 +83,12 @@
 			}
 
 			//Query scores
-			$temp_criterias = $criterias;
-			$criterias = [];
 			$total = 0;
 
 			//loop all through criterias
 			foreach($temp_criterias as $criteria){
 				
-				$sql = "CALL view_score(".$team->project_id.",".$judge_id.",".$criteria->criteria_id.")";
+				$sql = "CALL view_score(".$project_id.",".$judge_id.",".$criteria->criteria_id.")";
 
 				$result = $conn->query($sql);
 				if($result){
@@ -103,7 +108,11 @@
 				    $conn->next_result();
 				}
 				else{
-					$criteria->score = 0;
+					$score_details = [];
+					$score_details['score_id'] = 0;
+					$score_detials['score'] = 0;
+
+					$criteria->score_details = $score_details;
 				}
 
 				array_push($criterias, $criteria);
@@ -111,6 +120,7 @@
 
 			$team->criteria = $criterias;
 			$team->total = $total;
+
 			array_push($teams, $team);
 		}
 
