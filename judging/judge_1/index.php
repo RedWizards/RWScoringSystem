@@ -96,14 +96,21 @@
 									
 									<div class="row team-desc">
 										<p>TEAM MEMBERS</p>
+
+										<ul>
+											<!-- paayos nalang nito prince -->
+											<li ng-repeat="member in team.members">
+												{{member.participant_firstName}} {{member.participant_lastName}}
+											</li>
+										</ul>
 									</div>
 									
 									<div class="row team-desc">
-										<h4>PROJECT NAME</h4>
+										<h4>{{team.project_name}}</h4>
 									</div>
 									
 									<div class="row team-desc">
-										<p>PROJECT DESCRIPTION</p>
+										<p>{{team.long_desc}}</p>
 									</div>
 								
 								</div>
@@ -144,12 +151,12 @@
 										</div>
 										
 										<div class="col-md-7 text-left">
-											<h4>{{criteria.name}}</h4>
-											<small><i>{{criteria.description}}</i></small>
+											<h4>{{criteria.criteria_desc}}</h4>
+											<small><i>{{criteria.criteria_longdesc}}</i></small>
 										</div>
 												
 										<div class="col-md-4">
-											<h4><input type="number" class="text-right" name="criteria-{{criteria.criteria_id}}" style="width: 4em;" ng-model="criteria.score" ng-change="updateScore(team)"/><span> / {{criteria.weight}}</span></h4>
+											<h4><input type="number" class="text-right" name="criteria-{{criteria.criteria_id}}" style="width: 4em;" ng-model="criteria.score" ng-change="updateScore(team)" value="{{criteria.score}}"/><span> / {{criteria.criteria_weight}}</span></h4>
 										</div>
 										
 										<hr>

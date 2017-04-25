@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 24, 2017 at 04:07 PM
+-- Generation Time: Apr 25, 2017 at 03:13 AM
 -- Server version: 5.6.26-log
 -- PHP Version: 7.0.4
 
@@ -185,7 +185,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `register_team` (IN `in_team_name` V
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `view_criteria` (IN `in_event_id` INT(11))  BEGIN
-	SELECT criteria_id, criteria_desc, criteria_weight
+	SELECT criteria_id, criteria_desc, criteria_longdesc, criteria_weight
     FROM criteria
     WHERE event_id = in_event_id;
 END$$
@@ -201,24 +201,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `view_members` (IN `in_team_id` INT(
 	WHERE team_id = in_team_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `view_score` (IN `in_project_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `view_score` (IN `in_project_id` INT, IN `in_judge_id` INT, IN `in_criteria_id` INT)  BEGIN
 	SELECT
-		c.criteria_desc,
-        s.score
+		score
 	FROM
-		scores s, 
-		project p,
-        event e,
-        criteria c
-	WHERE s.project_id = in_project_id
-			AND p.project_id = s.project_id
-            AND e.event_id = p.event_id
-            AND c.event_id = p.event_id
-            AND s.criteria_id = c.criteria_id;
+		scores
+	WHERE project_id = in_project_id
+			AND judge_id = in_judge_id
+            AND criteria_id = in_criteria_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `view_teams` (IN `in_event_id` INT(11))  BEGIN
-	SELECT t.team_id, t.team_name, p.project_name, p.project_type, p.short_desc, p.long_desc
+	SELECT t.team_id, t.team_name, p.project_id, p.project_name, p.project_type, p.short_desc, p.long_desc
     FROM team t,
 		project p
     WHERE 
@@ -238,18 +232,19 @@ CREATE TABLE `criteria` (
   `criteria_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   `criteria_desc` varchar(160) DEFAULT NULL,
-  `criteria_weight` int(11) DEFAULT NULL
+  `criteria_weight` int(11) DEFAULT NULL,
+  `criteria_longdesc` varchar(800) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `criteria`
 --
 
-INSERT INTO `criteria` (`criteria_id`, `event_id`, `criteria_desc`, `criteria_weight`) VALUES
-(1, 1, 'Scalability and Impact', 25),
-(2, 1, 'Execution and Design', 25),
-(3, 1, 'Business Model', 25),
-(4, 1, 'Project Validation', 25);
+INSERT INTO `criteria` (`criteria_id`, `event_id`, `criteria_desc`, `criteria_weight`, `criteria_longdesc`) VALUES
+(1, 1, 'Scalability and Impact', 25, 'To what extent can the project be replicated or adapted by the bank and  different sectors Can this app be used by its target audience?'),
+(2, 1, 'Execution and Design', 25, 'Do they have a prototype? How functional is the technical demo? Design matters! Does the  project easy to use?'),
+(3, 1, 'Business Model', 25, 'How can they make it a successful  business? What customer segments they have defined and who are the early adopters? What are the (potential) revenue / cost models?'),
+(4, 1, 'Project Validation', 25, 'Did they test the market Are they solving real problems? What is the value preposition?');
 
 -- --------------------------------------------------------
 
@@ -641,27 +636,27 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `criteria`
 --
 ALTER TABLE `criteria`
-  MODIFY `criteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `criteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `judge`
 --
 ALTER TABLE `judge`
-  MODIFY `judge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `judge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
-  MODIFY `participant_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `participant_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `scores`
 --
@@ -671,7 +666,7 @@ ALTER TABLE `scores`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
