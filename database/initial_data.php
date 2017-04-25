@@ -16,8 +16,14 @@
 		if($result){
 		    // Cycle through results
 		    while ($row = $result->fetch_object()){
+
+		    	//convert team_id and project_id to int
+		    	$row->team_id = intval($row->team_id);
+		    	$row->project_id = intval($row->project_id);
+
 		        array_push($teams,$row);
 		    }
+		    
 		    // Free result set
 		    $result->close();
 		    $conn->next_result();
@@ -28,6 +34,13 @@
 		if($result){
 		    // Cycle through results
 		    while ($row = $result->fetch_object()){
+
+		    	//convert criteria_id to int
+		    	$row->criteria_id = intval($row->criteria_id);
+
+		    	//convert criteria_weight to float
+				$row->criteria_weight = floatval($row->criteria_weight);
+
 		        array_push($criterias,$row);
 		    }
 		    // Free result set
@@ -48,6 +61,10 @@
 
 			    // Cycle through results
 			    while ($row = $result->fetch_object()){
+
+			    	//convert member_id to int
+			   		$row->participant_id = intval($row->participant_id);
+
 			        array_push($members, $row);
 			    }
 
@@ -65,13 +82,21 @@
 
 			//loop all through criterias
 			foreach($temp_criterias as $criteria){
+				
 				$sql = "CALL view_score(".$team->project_id.",".$judge_id.",".$criteria->criteria_id.")";
+
 				$result = $conn->query($sql);
 				if($result){
 				    $row = $result->fetch_object();
 
-				    $criteria->score = floatval($row->score);
-				    $total += floatval($row->score);
+				    //convert score_id to int and score to float
+				    $row->score_id = intval($row->score_id);
+				    $row->score = floatval($row->score);
+
+				    //add to json the score data
+				    $criteria->score_details = $row;
+
+				    $total += $row->score;
 
 				    // Free result set
 				    $result->close();
