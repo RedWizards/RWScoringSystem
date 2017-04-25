@@ -156,7 +156,7 @@
 										</div>
 												
 										<div class="col-md-4">
-											<h4><input type="number" class="text-right" name="criteria-{{criteria.criteria_id}}" style="width: 4em;" ng-model="criteria.score" ng-change="updateScore(team)" value="{{criteria.score}}"/><span> / {{criteria.criteria_weight}}</span></h4>
+											<h4><input type="number" class="text-right" name="criteria-{{criteria.criteria_id}}" style="width: 4em;" ng-model="criteria.score_details.score" ng-change="updateScore(team)" value="{{criteria.score_details.score}}"/><span> / {{criteria.criteria_weight}}</span></h4>
 										</div>
 										
 										<hr>
@@ -190,7 +190,7 @@
 									</div>
 								
 									<div class="col-md-6">
-										<button class="btn btn-lg btn-primary submit-score">SUBMIT</button>
+										<button class="btn btn-lg btn-primary submit-score" ng-click="setScores(team.criteria)">SUBMIT</button>
 									</div>
 									
 									<div class="col-md-2">

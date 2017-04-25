@@ -22,116 +22,24 @@
 			});
 		}
 		
-		init();		
-		
-		
-		// $scope.teams = [
-		// 			{
-		// 				"team_name": "Harambeats",
-		// 				"criteria": [
-		// 					{
-		// 						"criteria_id": 1,
-		// 						"name": "Technical Difficulty",
-		// 						"weight": 25,
-		// 						"score": 0,
-		// 						"description": "Includes the technicality of the application"
-		// 					},
-		// 					{
-		// 						"criteria_id": 2,
-		// 						"name": "Innovation",
-		// 						"weight": 25,
-		// 						"score": 0, 
-		// 						"description": 
-		// 						"Inno innov inoova innvat innovation"
-		// 					},
-		// 					{
-		// 						"criteria_id": 3,
-		// 						"name": "Business Impact",
-		// 						"weight": 25,
-		// 						"score": 0, 
-		// 					    "description": "Business impact impact impact impact"
-		// 					},
-		// 					{
-		// 						"criteria_id": 4, 
-		// 						"name": "Demo",
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Demoooooooooooooooooooooooo"
-		// 					}
-		// 				],
-		// 				"total": 0,
-		// 				"isActive": false
-		// 			},
-		// 			{
-		// 				"team_name": "Team Mamba",
-		// 				"criteria": [
-		// 					{
-		// 						"criteria_id": 1, "name": 
-		// 						"Technical Difficulty", 
-		// 						"weight": 25, "score": 0, 
-		// 						"description": "Includes the technicality of the application"
-		// 					},
-		// 					{
-		// 						"criteria_id": 2, 
-		// 						"name": "Innovation", 
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Inno innov inoova innvat innovation"
-		// 					},
-		// 					{
-		// 						"criteria_id": 3, 
-		// 						"name": "Business Impact", 
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Business impact impact impact impact"
-		// 					},
-		// 					{
-		// 						"criteria_id": 4, 
-		// 						"name": "Demo", 
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Demoooooooooooooooooooooooo"
-		// 					}
-		// 				],
-		// 				"total": 0,
-		// 				"isActive": false
-		// 			},
-		// 			{
-		// 				"team_name": "Team Arandia",
-		// 				"criteria": [
-		// 					{
-		// 						"criteria_id": 1, "name": 
-		// 						"Technical Difficulty", 
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Includes the technicality of the application"
-		// 					},
-		// 					{
-		// 						"criteria_id": 2, 
-		// 						"name": "Innovation", 
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Inno innov inoova innvat innovation"
-		// 					},
-		// 					{
-		// 						"criteria_id": 3, 
-		// 						"name": "Business Impact", 
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Business impact impact impact impact"
-		// 					},
-		// 					{
-		// 						"criteria_id": 4, 
-		// 						"name": "Demo", 
-		// 						"weight": 25, 
-		// 						"score": 0, 
-		// 						"description": "Demoooooooooooooooooooooooo"
-		// 					}
-		// 				],
-		// 				"total": 0,
-		// 				"isActive": false
-		// 			}
-		// 		];
+		init();
+
+		$scope.setScores = function(criterias){
+			var sheet_url= '../../database/update_score.php';
+			
+			for(var i = 0; i < criterias.length; i++){
+				$.ajax({
+					url: sheet_url,
+					data:{
+						score_id: criterias[i].score_details.score_id,
+						score: criterias[i].score_details.score
+					}
+				}).done(function(data){
+					alert(data);
+				});
+			}
+			
+		}		
 		
 		$scope.updateScore = function(team) {
 			team.total = 0;
