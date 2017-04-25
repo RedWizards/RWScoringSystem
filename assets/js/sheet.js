@@ -27,6 +27,8 @@
 		$scope.setScores = function(criterias){
 			var sheet_url= '../../database/update_score.php';
 			
+			var success = true;
+
 			for(var i = 0; i < criterias.length; i++){
 				$.ajax({
 					url: sheet_url,
@@ -34,9 +36,15 @@
 						score_id: criterias[i].score_details.score_id,
 						score: criterias[i].score_details.score
 					}
-				}).done(function(data){
-					alert(data);
-				});
+				}).error(function(){
+					success = false;
+				});;
+			}
+
+			if(success == true){
+				alert("success");
+			}else{
+				alert("fail");
 			}
 			
 		}		
@@ -44,7 +52,7 @@
 		$scope.updateScore = function(team) {
 			team.total = 0;
 			for (var i = 0; i < team.criteria.length; i++) {
-				team.total += team.criteria[i].score;
+				team.total += team.criteria[i].score_details.score;
 			}
 		}
 		
