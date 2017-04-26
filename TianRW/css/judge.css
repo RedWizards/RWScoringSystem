@@ -1,5 +1,5 @@
 		body{
-			background-color: #e9ebee;
+			background-color: #b1bacf;
 			color: #2f3e87;
 		}
 		
@@ -56,6 +56,8 @@
 			color: black;
 		}
 		
-		#nav{
-			background-color: #529a9a
-		}
+		#nav {
+		background-color: #3f7373;
+		margin: 0 auto;
+		padding: 20px;
+		margin-bottom: 1em;
