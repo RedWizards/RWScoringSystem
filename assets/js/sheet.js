@@ -38,7 +38,7 @@
 					}
 				}).error(function(){
 					success = false;
-				});;
+				});
 			}
 
 			if(success == true){
