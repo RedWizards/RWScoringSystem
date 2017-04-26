@@ -1,34 +1,69 @@
-	var app = angular.module('score-app', []);
 
-	app.controller('score-ctrl', function($scope, $http) {
+	var app = angular.module('scoring-sheet', []);
+
+	app.controller('sheet-ctrl', function($scope) {
 		
-		$scope.hasActive = false;
+		$scope.activeNow =  false;
+		$scope.isActive = false;
+		
+		var sheet_url= '../../database/initial_data.php';
+		$scope.scoreSheet = [];
+		
+		function init() {
+			$.ajax({
+				url: sheet_url,
+				data:{
+					judge_id: 1,
+					event_id:1
+				}
+			}).done(function(data) {
+				$scope.teams = data;
+				$scope.$apply();
+			});
+		}
+		
+		init();
 
-		$scope.teams = function(){
-        	return $http({
-	            method: 'GET',
-	            data: {"judge_id": 2},
-	            url: '../../database/initial_data.php'
-	        });
-	    };
+		$scope.setScores = function(criterias){
+			var sheet_url= '../../database/update_score.php';
+			
+			var success = true;
 
-	    $scope.$apply();
+			for(var i = 0; i < criterias.length; i++){
+				$.ajax({
+					url: sheet_url,
+					data:{
+						score_id: criterias[i].score_details.score_id,
+						score: criterias[i].score_details.score
+					}
+				}).error(function(){
+					success = false;
+				});
+			}
 
+			if(success == true){
+				alert("success");
+			}else{
+				alert("fail");
+			}
+			
+		}		
+		
 		$scope.updateScore = function(team) {
 			team.total = 0;
-			//console.log(teamcriteria.length);
 			for (var i = 0; i < team.criteria.length; i++) {
-				team.total += team.criteria[i].score;
+				team.total += team.criteria[i].score_details.score;
 			}
 		}
 		
 		$scope.setScore = function(team) {
 			team.isActive = true;
-			$scope.hasActive = true;
+			$scope.activeNow = true;
 		}
 		
 		$scope.closeTeam = function(team) {
 			team.isActive = false;
-			$scope.hasActive = false;
+			$scope.activeNow = false;
 		}
+		
 	});

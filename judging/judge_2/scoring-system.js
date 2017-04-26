@@ -1,27 +1,18 @@
-
 	var app = angular.module('score-app', []);
 
-	app.controller('score-ctrl', function($scope) {
+	app.controller('score-ctrl', function($scope, $http) {
 		
 		$scope.hasActive = false;
-		
-		var request = $.ajax({
-		  url: '../../database/initial_data.php',
-		  type: 'GET',
-		  data: {
-		  	judge_id: 2
-		  },
-		  dataType: 'json'
-		});
 
-		request.done(function(data) {
-			$scope.teams = JSON.stringify(data, null, 4);
-			console.log($scope.teams);
-		});
+		$scope.teams = function(){
+        	return $http({
+	            method: 'GET',
+	            data: {"judge_id": 2},
+	            url: '../../database/initial_data.php'
+	        });
+	    };
 
-		request.fail(function(jqXHR, textStatus) {
-		   alert( "Request failed: " + textStatus );
-		});
+	    $scope.$apply();
 
 		$scope.updateScore = function(team) {
 			team.total = 0;
@@ -40,4 +31,4 @@
 			team.isActive = false;
 			$scope.hasActive = false;
 		}
-});
+	});
