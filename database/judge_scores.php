@@ -26,89 +26,59 @@
 		    $conn->next_result();
 		}
 
-		$teams = array();
-
-		//Query all judges
-		$sql = "CALL view_teams(".$event_id.")";
-		$result = $conn->query($sql);
-		if($result){
-		    // Cycle through results
-		    while ($row = $result->fetch_object()){
-
-		    	//convert judge_id to int
-		    	$row->team_id = intval($row->team_id);
-		    	$row->project_id = intval($row->project_id);
-
-		        array_push($teams,$row);
-		    }
-		    
-		    // Free result set
-		    $result->close();
-		    $conn->next_result();
-		}
-
-		$criterias = array();
-
-		$sql = "CALL view_criteria(".$event_id.")";
-		$result = $conn->query($sql);
-		if($result){
-		    // Cycle through results
-		    while ($row = $result->fetch_object()){
-
-		    	//convert judge_id to int
-		    	$row->criteria_id = intval($row->criteria_id);
-
-		        array_push($criterias,$row);
-		    }
-		    
-		    // Free result set
-		    $result->close();
-		    $conn->next_result();
-		}
-
 		$temp_judges = array();
-
 		foreach($judges as $judge){
+			//Query all judges
+			$sql = "CALL judge_scoresheet(".$judge->judge_id.")";
+			$result = $conn->query($sql);
+			if($result){
+				$teams = array();
+			    while ($row = $result->fetch_object()){
+			    	$team = array();
+			    	$criteria = array();
+			    	$total = 0;
+			    	foreach($row as $key => $value){
+			    		switch($key){
+			    			case 'project_id':
+			    				$team['project_id'] = intval($row->project_id);
+			    				break;
+			    			case 'project_name':
+			    				$team['project_name'] = $row->project_name;
+			    				break;
+			    			case 'team_id':
+			    				$team['team_id'] = intval($row->team_id);
+			    				break;
+			    			case 'team_name':
+			    				$team['team_name'] = $row->team_name;
+			    				break;
+			    			default:
+			    				$total += floatval($value);
+			    				$temp_criteria = array();
+			    				$temp_criteria['criteria_desc'] = $key;
+			    				$temp_criteria['score'] = floatval($value);
+			    				array_push($criteria, $temp_criteria);
+			    		}
+				    	unset($key);
+				    	unset($value);
+			    	}
+			    	$temp_criteria = array();
+			    	$temp_criteria['criteria_desc'] = 'Total';
+			    	$temp_criteria['score'] = $total;
+					array_push($criteria, $temp_criteria);
 
-			$temp_teams = array();
-			foreach($teams as $team){
-
-				$temp_criterias = array();
-				$total = 0;
-				foreach($criterias as $criteria){
-					$sql = "CALL view_score(".$team->project_id.",".$judge->judge_id.",".$criteria->criteria_id.")";
-					$result = $conn->query($sql);
-					if($result){
-					    $row = $result->fetch_object();
-
-					    $row->score_id = intval($row->score_id);
-					    $row->score = floatval($row->score);
-
-					    $total += $row->score;
-
-					    $criteria->score = $row;
-
-					    array_push($temp_criterias,$criteria);
-					    
-					    $result->close();
-					    $conn->next_result();
-					}
-					else{
-						$row->score_id = null;
-						$row->score = 0;
-
-						$criteria->score = $row;
-
-						array_push($temp_criterias,$criteria);
-					}
-				}
-				$team->criteria = $temp_criterias;
-				$team->total = $total;
-				array_push($temp_teams, $team);
+			    	$team['criteria'] = $criteria;
+			    	array_push($teams, $team);
+			    }
+			    $judge->teams = $teams;
+			    
+			    // Free result set
+			    $result->close();
+			    $conn->next_result();
 			}
-			$judge->teams = $temp_teams;
 			array_push($temp_judges, $judge);
 		}
+		unset($judge);
+		
 
 		echo json_encode($temp_judges);
 	}

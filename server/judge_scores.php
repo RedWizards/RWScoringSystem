@@ -40,7 +40,7 @@
 		<div class="row">
 		
 			<div class="col-md-12 text-center" id="head-name">
-					SCORES' SUMMARY
+					SCORES SUMMARY
 			</div>
 
 		</div>
@@ -54,12 +54,12 @@
 			<div class="col-md-3">
 				<h2 id="choose-judge-text">JUDGES</h2>
 				<ul class="nav nav-pills nav-stacked">
-					<li ng-repeat="judge in judges"><a data-toggle="pill" href="#table-{{judge.judge_id}}" ng-click="toggle_table(judge.judge_id)">{{judge.judge_name}}</a></li>
+					<li ng-repeat="judge in scores"><a data-toggle="pill" href="#table-{{judge.judge_id}}" ng-click="toggle_table(judge.judge_id)">{{judge.judge_name}}</a></li>
 	 			</ul>
 			</div>
 			
 			<div class="col-md-9" id="col"> 
-				<div class="tab-content row" ng-repeat="judge in judges">
+				<div class="tab-content row" ng-repeat="judge in scores">
 					<div id="table-{{judge.judge_id}}" class="tab-pane fade in active judge-style" ng-show="active">
 						<div class="content">
 
@@ -85,11 +85,7 @@
 
 				                                        <th>Team Name</th>
 
-				                                    	<th class="text-center" ng-repeat="criteria in judge.teams[0].criteria">{{criteria.criteria_name}}</th>
-
-				                                    	<th>
-				                                    		Total
-				                                    	</th>
+				                                    	<th class="text-center" ng-repeat="criteria in judge.teams[0].criteria">{{criteria.criteria_desc}}</th>
 
 				                                    </thead>
 
@@ -99,9 +95,7 @@
 
 				                                        	<td>{{team.team_name}}</td>
 
-				                                        	<td class="text-center" ng-repeat="criteria in team.criteria">{{criteria.score.score}}</td>
-
-				                                        	<td>{{team.total}}</td>
+				                                        	<td class="text-center" ng-repeat="criteria in team.criteria">{{criteria.score}}</td>
 				                                        </tr>
 
 				                                    </tbody>
