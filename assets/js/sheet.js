@@ -1,70 +1,58 @@
 
 	var app = angular.module('scoring-sheet', []);
 
-	
 	app.controller('sheet-ctrl', function($scope) {
 		
-		/*
+		$scope.activeNow =  false;
+		$scope.isActive = false;
 		
-		var sheet_url= 'http://localhost/redwizards/ss/api/sheet.php';
+		var sheet_url= '../../database/initial_data.php';
 		$scope.scoreSheet = [];
 		
 		function init() {
 			$.ajax({
-				url: sheet_url
+				url: sheet_url,
+				data:{
+					judge_id: 1,
+					event_id:1
+				}
 			}).done(function(data) {
-				$scope.scoreSheet = data;
+				$scope.teams = data;
 				$scope.$apply();
 			});
 		}
 		
-		init();		
-		
-		*/
-		
-		$scope.activeNow =  false;
-		$scope.isActive = false;
-	
-		$scope.teams = [
-			{
-				"name": "Harambeats",
-				"criteria": [
-					{"criteria_id": 1, "name": "Technical Difficulty", "weight": 25, "score": 0, "description": "Includes the technicality of the application"},
-					{"criteria_id": 2, "name": "Innovation", "weight": 25, "score": 0, "description": "Inno innov inoova innvat innovation"},
-					{"criteria_id": 3, "name": "Business Impact", "weight": 25, "score": 0, "description": "Business impact impact impact impact"},
-					{"criteria_id": 4, "name": "Demo", "weight": 25, "score": 0, "description": "Demoooooooooooooooooooooooo"}
-				],
-				"total": 0,
-				"isActive": false
-			},
-			{
-				"name": "Team Mamba",
-				"criteria": [
-					{"criteria_id": 1, "name": "Technical Difficulty", "weight": 25, "score": 0, "description": "Includes the technicality of the application"},
-					{"criteria_id": 2, "name": "Innovation", "weight": 25, "score": 0, "description": "Inno innov inoova innvat innovation"},
-					{"criteria_id": 3, "name": "Business Impact", "weight": 25, "score": 0, "description": "Business impact impact impact impact"},
-					{"criteria_id": 4, "name": "Demo", "weight": 25, "score": 0, "description": "Demoooooooooooooooooooooooo"}
-				],
-				"total": 0,
-				"isActive": false
-			},
-			{
-				"name": "Team Arandia",
-				"criteria": [
-					{"criteria_id": 1, "name": "Technical Difficulty", "weight": 25, "score": 0, "description": "Includes the technicality of the application"},
-					{"criteria_id": 2, "name": "Innovation", "weight": 25, "score": 0, "description": "Inno innov inoova innvat innovation"},
-					{"criteria_id": 3, "name": "Business Impact", "weight": 25, "score": 0, "description": "Business impact impact impact impact"},
-					{"criteria_id": 4, "name": "Demo", "weight": 25, "score": 0, "description": "Demoooooooooooooooooooooooo"}
-				],
-				"total": 0,
-				"isActive": false
+		init();
+
+		$scope.setScores = function(criterias){
+			var sheet_url= '../../database/update_score.php';
+			
+			var success = true;
+
+			for(var i = 0; i < criterias.length; i++){
+				$.ajax({
+					url: sheet_url,
+					data:{
+						score_id: criterias[i].score_details.score_id,
+						score: criterias[i].score_details.score
+					}
+				}).error(function(){
+					success = false;
+				});;
 			}
-		];
+
+			if(success == true){
+				alert("success");
+			}else{
+				alert("fail");
+			}
+			
+		}		
 		
 		$scope.updateScore = function(team) {
 			team.total = 0;
 			for (var i = 0; i < team.criteria.length; i++) {
-				team.total += team.criteria[i].score;
+				team.total += team.criteria[i].score_details.score;
 			}
 		}
 		

@@ -55,15 +55,16 @@ html, body{
 
 header {
 	background-color: #3f7373;
-	margin: 0 auto;
+	/*margin: 0 auto;*/
 	padding: 50px;
+	margin-bottom: 1em;
 }
 
 header #head-name {
-	width: 100%;
+	/*width: 100%;*/
 	color: white;
-	font-size: 90px;
-	font-family: SIMPLIFICA Typeface;
+	font-size: 3em;
+	/*font-family: SIMPLIFICA Typeface;*/
 	font-weight: bold;
 	outline: none;
 }
@@ -79,15 +80,15 @@ header #head-name {
 }
 
 .judge-style{
-	height: 100%;
+	/*height: 100%;*/
 	background-color: white;
-	font-family: Montserrat-Regular;
+	/*font-family: Montserrat-Regular;*/
 	font-size: 25px;
 	background-color: #e9ebee;
-	padding: 50px;
+	padding: 1em;
 }
 
 .judge-name{
 	font-family: SIMPLIFICA Typeface;
-	font-size: 90px;
+	font-size: 2em;
 }
