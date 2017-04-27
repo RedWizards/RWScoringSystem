@@ -115,6 +115,51 @@ body {
 
 }
 
+.submit-score {
+	transition: all 0.5s ease;
+	background-color: #D3610A;
+	color: white;
+	border: 2px solid #D3610A;
+	width: 50%;
+	padding: 0.5em;
+	font-size: 1.5em;
+}
+
+.submit-score:hover {
+	background-color: white;
+	border: 2px solid #78298E;
+	color: #78298E;
+}
+
+.submit-score:active {
+	background-color: #78298E;
+	border: 2px solid #78298E;
+	color: white;
+}
+
+.view-btn {
+	transition: all 0.5s ease;
+	background-color: #D3610A;
+	color: white;
+	border: 2px solid #D3610A;
+	width: 20%;
+	padding: 0.5em;
+	font-size: 1em;
+}
+
+.view-btn:hover {
+	background-color: white;
+	border: 1px solid #78298E;
+	color: #78298E;
+}
+
+.view-btn:active {
+	background-color: #78298E;
+	border: 1px solid #78298E;
+	color: white;
+}
+
+
 .team-members {
 	padding: 1em;
 }

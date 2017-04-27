@@ -81,7 +81,7 @@
 						<div class="row">
 							
 							<div class="col-md-12">
-								<button class="btn pull-left" ng-click="closeTeam(team)">View All Teams</button>
+								<button class="view-btn pull-left" ng-click="closeTeam(team)">View All Teams</button>
 							</div>
 							<!--
 							<div class="col-md-6 text-right">
@@ -199,17 +199,9 @@
 									</div>
 								</div>
 								
-								<div class="row text-center container">
+								<div class="row" style="margin-top: 2em;">
 								
-									<div class="col-md-2">
-									</div>
-								
-									<div class="col-md-6">
-										<button class="btn btn-lg btn-primary submit-score" ng-click="setScores(team)">SUBMIT</button>
-									</div>
-									
-									<div class="col-md-2">
-									</div>
+										<button class="submit-score" ng-click="setScores(team)">SUBMIT</button>
 									
 								</div>
 								
