@@ -101,6 +101,11 @@
 				    //convert score_id to int and score to float
 				    $row->score_id = intval($row->score_id);
 					$row->score = floatval($row->score);
+
+					if($row->score == 0){
+						$row->score = null;
+					}
+
 				    $total += $row->score;
 
 				    //add to json the score data
