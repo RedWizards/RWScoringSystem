@@ -57,14 +57,14 @@ header {
 	background-color: #3f7373;
 	margin: 0 auto;
 	padding: 20px;
-	margin-bottom: 1em;
+
 }
 
 header #head-name {
 	/*width: 100%;*/
 	color: white;
 	font-size: 3em;
-	/*font-family: SIMPLIFICA Typeface;*/
+	font-family: Montserrat-Light;
 	font-weight: bold;
 	outline: none;
 }
@@ -74,24 +74,29 @@ header #head-name {
 }
 
 #choose-judge-text{
-	font-family: SIMPLIFICA Typeface;
-	font-size: 50px;
-	padding: 10px; 
+	font-family: Montserrat-Light;
+	font-size: 2.5em;
+	font-weight: bold;
+	padding: 0.2em; 
 }
 
 .judge-style{
-	/*height: 100%;*/
-	/*font-family: Montserrat-Regular;*/
-	font-family: SIMPLIFICA Typeface;
-	font-size: 22px;
-	font-weight: bold;
+	height: 34em;
+	font-family: Montserrat-Light;
+	font-size: 1.5em;
 	background-color: #e9ebee;
-	padding: 1em;
+	padding: 2em;
+}
+
+.judges-list{
+	margin-right: 0px;
 }
 
 .judge-name{
-	font-family: SIMPLIFICA Typeface;
+	font-family: Montserrat-Light;
 	font-size: 2em;
+	font-weight: bold;
+	padding-bottom: 0.8em;
 }
 
 #bg-color{
