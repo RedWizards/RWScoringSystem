@@ -38,8 +38,12 @@
 	<header class="container-fluid">
 		
 		<div class="row">
+
+			<div class="col-md-3 text-center">
+				<button><img id="image" src="../assets/images/export-icon.png"> EXPORT DATA</button>
+			</div>
 		
-			<div class="col-md-12 text-center" id="head-name">
+			<div class="col-md-9 text-center" id="head-name">
 					SCORES SUMMARY
 			</div>
 
@@ -83,7 +87,7 @@
 
 				                                <table class="table table-striped">
 
-				                                    <thead>
+				                                    <thead id="thead">
 
 				                                        <th>Team Name</th>
 
