@@ -24,17 +24,17 @@
 		
 		init();
 
-		$scope.setScores = function(criterias){
+		$scope.setScores = function(team){
 			var sheet_url= '../../database/update_score.php';
 			
 			var success = true;
 
-			for(var i = 0; i < criterias.length; i++){
+			for(var i = 0; i < team.criteria.length; i++){
 				$.ajax({
 					url: sheet_url,
 					data:{
-						score_id: criterias[i].score_details.score_id,
-						score: criterias[i].score_details.score
+						score_id: team.criteria[i].score_details.score_id,
+						score: team.criteria[i].score_details.score
 					}
 				}).error(function(){
 					success = false;
@@ -42,9 +42,10 @@
 			}
 
 			if(success == true){
-				alert("success");
+				alert("Scores submitted!");
+				$scope.closeTeam(team);
 			}else{
-				alert("fail");
+				alert("Error submitting scovres.");
 			}
 			
 		}		
