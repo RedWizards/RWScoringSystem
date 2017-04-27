@@ -176,6 +176,17 @@ body {
 	padding: 0 1em;
 }
 
+#criteria {
+	margin-bottom: 2em;
+	padding: 1em;
+}
+
+#score-title {
+	margin: 1em;
+	font-size: 2em;
+	font-style: bold;
+}
+
 @media only screen and (max-device-width : 360px) {
     
 	body {
@@ -213,4 +224,20 @@ body {
 		margin-bottom: 0;
 		margin-top: 1em;
 	}
+	
+
+	#col-lbl {
+		height: 100%;
+		font-size: 2em;
+		padding-top: 1em;
+	}
+	
+	#sheet-title {
+		display: none;
+	}
+	
+	#cri-id {
+		display: none;
+	}
+	
 }
