@@ -13,7 +13,7 @@
 			$.ajax({
 				url: sheet_url,
 				data:{
-					judge_id: 1,
+					judge_id: 3,
 					event_id: 1
 				}
 			}).done(function(data) {
