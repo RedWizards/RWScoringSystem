@@ -1,3 +1,4 @@
+
 	var app = angular.module('view', []);
 
 	app.controller('judges-score', function($scope){
@@ -10,6 +11,7 @@
 					event_id: 1
 				}
 			}).done(function(data) {
+				console.log(data);
 				$scope.scores = data;
 				$scope.$apply();
 			});
@@ -20,13 +22,15 @@
 		var activeTable = 1;
 		$scope.active = false;
 
-		$scope.toggle_table = function(table){
-			console.log(table);
-			console.log(activeTable);
-			if(activeTable == table){
-				$scope.active = true;
-				activeTable = table; 
-			}
+		$scope.toggle_table = function(clickedJudge){
+
+			// set every other table to active = false
+			$scope.scores.forEach(function(judge) {
+				judge.active = false;
+			})
+
+			clickedJudge.active = true;
+
 		}
 
 		// function init(){

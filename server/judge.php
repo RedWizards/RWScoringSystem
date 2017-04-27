@@ -40,7 +40,7 @@
 		<div class="row">
 		
 			<div class="col-md-12 text-center" id="head-name">
-					SCORES SUMMARY
+					SCORES' SUMMARY
 			</div>
 
 		</div>
@@ -54,15 +54,13 @@
 			<div class="col-md-3">
 				<h2 id="choose-judge-text">JUDGES</h2>
 				<ul class="nav nav-pills nav-stacked">
-					<!-- on ng click->toggle just pass the whole "judge" and set the active property to true -->
-					<li ng-repeat="judge in scores"><a data-toggle="pill" href="#table-{{judge.judge_id}}" ng-click="toggle_table(judge)">{{judge.judge_name}}</a></li>
+					<li ng-repeat="judge in judges"><a data-toggle="pill" href="#table-{{judge.judge_id}}" ng-click="toggle_table(judge.judge_id)">{{judge.judge_name}}</a></li>
 	 			</ul>
 			</div>
 			
 			<div class="col-md-9" id="col"> 
-				<!-- Initialize a new property active on "judge" set it initally to false, active will on be true if toggled" -->
-				<div class="tab-content row" ng-repeat="judge in scores" ng-show="judge.active">
-					<div id="table-{{judge.judge_id}}" class="tab-pane fade in active judge-style" ng-init="judge.active = false" ng-show="judge.active">
+				<div class="tab-content row" ng-repeat="judge in judges">
+					<div id="table-{{judge.judge_id}}" class="tab-pane fade in active judge-style" ng-show="active">
 						<div class="content">
 
 				            <div class="container-fluid">
@@ -87,7 +85,11 @@
 
 				                                        <th>Team Name</th>
 
-				                                    	<th class="text-center" ng-repeat="criteria in judge.teams[0].criteria">{{criteria.criteria_desc}}</th>
+				                                    	<th class="text-center" ng-repeat="criteria in judge.teams[0].criteria">{{criteria.criteria_name}}</th>
+
+				                                    	<th>
+				                                    		Total
+				                                    	</th>
 
 				                                    </thead>
 
@@ -97,7 +99,9 @@
 
 				                                        	<td>{{team.team_name}}</td>
 
-				                                        	<td class="text-center" ng-repeat="criteria in team.criteria">{{criteria.score}}</td>
+				                                        	<td class="text-center" ng-repeat="criteria in team.criteria">{{criteria.score.score}}</td>
+
+				                                        	<td>{{team.total}}</td>
 				                                        </tr>
 
 				                                    </tbody>

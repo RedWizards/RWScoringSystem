@@ -2,6 +2,8 @@
 	header('Content-type: application/json');
 	require_once('connection.php');
 
+	mysqli_set_charset($conn, "utf8");
+
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 		$event_id = $_GET['event_id'];
@@ -28,12 +30,16 @@
 
 		$temp_judges = array();
 		foreach($judges as $judge){
+
+			// print_r($judges);
+
 			//Query all judges
 			$sql = "CALL judge_scoresheet(".$judge->judge_id.")";
 			$result = $conn->query($sql);
 			if($result){
 				$teams = array();
 			    while ($row = $result->fetch_object()){
+			    	// print_r($row);
 			    	$team = array();
 			    	$criteria = array();
 			    	$total = 0;
@@ -76,9 +82,9 @@
 			    $conn->next_result();
 			}
 			array_push($temp_judges, $judge);
+			// print_r($temp_judges);
 		}
 		unset($judge);
-		
 
 		echo json_encode($temp_judges);
 	}
