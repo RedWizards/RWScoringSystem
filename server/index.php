@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Scoring System</title>
+<head>
+	<title>Judge Score Sheet</title>
 		<!--
 		<link rel="icon" href="images/icon.ico" type="image/png" sizes="32x32">
 		-->
@@ -27,70 +27,101 @@
 		<link rel="stylesheet" href="../assets/css/font-awesome.min.css">
 		<!-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
 
-		<link rel="stylesheet" href="../assets/css/scoring-system.css">
-
-		<link rel="stylesheet" href="../assets/css/style.css">
-
+		<link rel="stylesheet" href="../assets/css/judge.css">
 		<script src="../assets/js/angular.min.js"></script>
+		<script src="../assets/js/judge.js"></script>
+	
+</head>
 
-		<script src="../assets/js/scoring-system.js"></script>	
+<body ng-app="view" ng-controller="judges-score">
 
-	</head>
-	<body>
-		<header class="container">
-			<div class="row text-center">
-				<div class="col-md-3" id="head-name">
-					EVENTS
-				</div>
+	<header class="container-fluid">
 		
-				<div class="col-md-3">
-					<button class="btn btn-default" id="new-event-btn">NEW EVENT</button>
-				</div>
-				
+		<div class="row">
+
+			<div class="col-md-3 text-center">
+				<a href="../database/export_score_breakdown.php" target="_top"><button><img id="image" src="../assets/images/export-icon.png"> EXPORT DATA</button></a>
+			</div>
+		
+			<div class="col-md-9 text-center" id="head-name">
+					SCORES SUMMARY
+			</div>
+
+		</div>
+
+	</header>
+
+	<div class="container-fluid" >
+	
+		<div class="row" id="judge-panel">
+		
+			<div class="col-md-3" class="judges-list">
+				<h2 id="choose-judge-text">JUDGES</h2>
+				<ul class="nav nav-pills nav-stacked">
+					<!-- on ng click->toggle just pass the whole "judge" and set the active property to true -->
+					<li ng-repeat="judge in scores"><a data-toggle="pill" href="#table-{{judge.judge_id}}" ng-click="toggle_table(judge)">{{judge.judge_name}}</a></li>
+	 			</ul>
 			</div>
 			
-		</header>
-		
-		<section class="container">
-		
-			<div id="events-record" ng-app="score-app" ng-controller="score-ctrl" ng-init="init()">
+			<div class="col-md-9" id="col"> 
+				<!-- Initialize a new property active on "judge" set it initally to false, active will on be true if toggled" -->
+				<div class="tab-content row" ng-repeat="judge in scores" ng-show="judge.active">
+					<div id="table-{{judge.judge_id}}" class="tab-pane fade in active judge-style" ng-init="judge.active = false" ng-show="judge.active">
+						<div class="content">
 
-				<!-- Shows when there is no record of events -->
-				<div id="no-event-record" ng-hide="hasRecord">
-					<i>No Events Recorded</i>
-				</div>
-				
-				<!-- Shows the list of events recorded -->
-				<div class="align-center" id="event-list" ng-show="hasRecord">
-					<div id="accordion">
-						<div class="panel panel-default" ng-repeat="record in records">
-							  <div class="panel-heading">
-								<h4 class="panel-title">
-								  <a id="" href="#"><b>{{record.event_name}}</b></a><small><i> by {{record.event_host}}</i></small>
-								  <a data-toggle="collapse" data-parent="#accordion" href="#{{record.event_id}}" title="Event Description"><span class="glyphicon glyphicon-info-sign pull-right"></span></a>
-								</h4>
-							  </div>
-							  <div id="{{record.event_id}}" class="panel-collapse collapse">
-								<div class="panel-body">
-									<h6>{{record.event_date}}</h6>
-									<br/>
-									<h5>{{record.event_desc}}</h5>
-								</div>
-							  </div>
-						</div>
+				            <div class="container-fluid">
+
+				                <div class="row">
+
+				                    <div class="col-md-12">
+
+				                        <div class="card">
+
+				                            <div class="header">
+
+				                                <h1 class="judge-name">{{judge.judge_name}}</h1>
+
+				                            </div>
+
+				                            <div class="content table-responsive table-full-width">
+
+				                                <table class="table table-striped">
+
+				                                    <thead id="thead">
+
+				                                        <th>Team Name</th>
+
+				                                    	<th class="text-center" ng-repeat="criteria in judge.teams[0].criteria">{{criteria.criteria_desc}}</th>
+
+				                                    </thead>
+
+				                                    <tbody>
+
+				                                        <tr ng-repeat="team in judge.teams">
+
+				                                        	<td>{{team.team_name}}</td>
+
+				                                        	<td class="text-center" ng-repeat="criteria in team.criteria">{{criteria.score}}</td>
+				                                        </tr>
+
+				                                    </tbody>
+
+				                                </table>
+
+
+
+				                            </div>
+
+				                        </div>
+
+				                    </div>
+			    			</div>
+						</div>	
 					</div>
 				</div>
-				
 			</div>
-			
-		</section>
+		</div>
 
-		<footer class="container text-center">
-		
-			<p><small>Powered by </small><strong>RED Wizard Events Management</strong> &copy; 2017</p>
-			
-		</footer>
-		
-	</body>
+</body>
 
 </html>

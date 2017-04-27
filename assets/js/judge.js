@@ -11,7 +11,6 @@
 					event_id: 1
 				}
 			}).done(function(data) {
-				console.log(data);
 				$scope.scores = data;
 				$scope.$apply();
 			});
@@ -33,15 +32,4 @@
 
 		}
 
-		// function init(){
-		// 	$.ajax({
-		// 		url: url,
-		// 		method: 'GET'
-		// 	}).done(function(data){
-		// 		$scope.judges = data;
-		// 		$scope.$apply();
-		// 	});
-		// }
-
-		// init();
 	});

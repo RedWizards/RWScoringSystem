@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 27, 2017 at 11:20 AM
+-- Generation Time: Apr 27, 2017 at 09:00 PM
 -- Server version: 5.6.26-log
 -- PHP Version: 7.0.4
 
@@ -94,6 +94,61 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `app_scoresheet` (IN `in_project_id`
 	DEALLOCATE PREPARE stmt;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `app_total_scoresheet` (IN `in_event_id` INT)  BEGIN
+	SET @sql = NULL;
+
+	SELECT
+		GROUP_CONCAT(DISTINCT
+			CONCAT(
+				'MAX(IF(team_name = ''', team_name,''', score, NULL)) AS ''', team_name ,"'"
+			)
+		) INTO @sql
+	FROM (
+		(
+        SELECT
+			t.team_name
+        FROM
+			project p,
+            team t
+		WHERE
+			p.event_id = in_event_id
+            AND t.team_id = p.team_id
+		) AS event_teams
+	);
+    
+	SET @sql = (
+		CONCAT('
+			SELECT judge_name AS Judge,', @sql ,'
+			FROM
+				(
+					SELECT 
+						j.judge_id, j.judge_name, t.team_name, (SELECT SUM(score) FROM scores WHERE project_id = p.project_id AND judge_id = j.judge_id) AS Score
+					FROM
+						judge j,
+						team t,
+						scores s,
+						event e,
+						project p
+					WHERE
+						e.event_id = ',in_event_id,'
+							AND p.event_id = e.event_id
+							AND j.event_id = e.event_id
+							AND s.judge_id = j.judge_id
+							AND s.project_id = p.project_id
+							AND t.team_id = p.team_id
+						GROUP BY team_name, judge_name
+						ORDER BY j.judge_id, t.team_name
+				) AS total_scores
+			GROUP BY
+				total_scores.judge_id
+		')
+	);
+
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_criteria` (IN `in_event_id` INT(11), IN `in_criteria_desc` VARCHAR(45), IN `in_criteria_weight` INT(11))  BEGIN
 	INSERT INTO criteria(event_id, criteria_desc, criteria_weight)
 		VALUES(in_event_id, in_criteria_desc, in_criteria_weight);
@@ -113,6 +168,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_average_score` (IN `in_team_id`
 	SELECT SUM(score)
     FROM scores
     WHERE team_id = in_team_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `give_remarks` (IN `in_judge_id` INT, IN `in_project_id` INT, IN `in_remarks` VARCHAR(800))  BEGIN
+	INSERT INTO remarks(judge_id,project_id,remarks) VALUES(in_judge_id, in_project_id, in_remarks);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `give_score` (IN `in_judge_id` INT(11), IN `in_criteria_id` INT(11), IN `in_project_id` INT(11), IN `in_score` INT(11))  BEGIN
@@ -141,7 +200,7 @@ INTO @sql FROM
     
 	SET @sql = (
 		CONCAT('
-			SELECT project_id, project_name, team_id, team_name,', @sql ,', (SELECT SUM(score) FROM scores WHERE judge_id = ',in_judge_id,' AND project_id = raw_scores.project_id) AS Total
+			SELECT project_id, project_name AS "Project Name", team_id, team_name AS "Team Name",', @sql ,', (SELECT SUM(score) FROM scores WHERE judge_id = ',in_judge_id,' AND project_id = raw_scores.project_id) AS Total
 			FROM
 				(
 					SELECT DISTINCT
@@ -184,6 +243,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `register_team` (IN `in_team_name` V
     VALUES(
         in_team_name
     );
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_remarks` (IN `in_judge_id` INT, IN `in_project_id` INT, IN `in_remarks` VARCHAR(800))  BEGIN
+	UPDATE remarks SET remark = in_remarks WHERE judge_id = in_judge_id AND project_id = in_project_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_score` (IN `in_score_id` INT, IN `in_score` INT)  BEGIN
@@ -293,21 +356,21 @@ CREATE TABLE `judge` (
 --
 
 INSERT INTO `judge` (`judge_id`, `event_id`, `judge_name`) VALUES
-(1, 1, 'Christian Cimbracruz'),
-(2, 1, 'Prince Julius Hari'),
-(3, 1, 'Tonichi Paul Dela Cruz'),
-(4, 1, 'Red Periabras'),
-(5, 1, 'Francis Olivo'),
-(6, 1, 'Ariel Conde'),
-(7, 1, 'Jedidiah Garcia'),
-(8, 1, 'Eadrian Marzan'),
-(9, 1, 'Clint Santos'),
-(10, 1, 'Jordan Bolinas'),
-(11, 1, 'Jem Zubiri'),
-(12, 1, 'Ian Briñosa'),
-(13, 1, 'Paul Sablan'),
-(14, 1, 'Jay Gecarane'),
-(15, 1, 'Joshua Castañeda');
+(1, 1, 'Judge 1'),
+(2, 1, 'Judge 2'),
+(3, 1, 'Judge 3'),
+(4, 1, 'Judge 4'),
+(5, 1, 'Judge 5'),
+(6, 1, 'Judge 6'),
+(7, 1, 'Judge 7'),
+(8, 1, 'Judge 8'),
+(9, 1, 'Judge 9'),
+(10, 1, 'Judge 10'),
+(11, 1, 'Judge 11'),
+(12, 1, 'Judge 12'),
+(13, 1, 'Judge 13'),
+(14, 1, 'Judge 14'),
+(15, 1, 'Judge 15');
 
 -- --------------------------------------------------------
 
@@ -360,8 +423,8 @@ CREATE TABLE `project` (
 
 INSERT INTO `project` (`project_id`, `event_id`, `team_id`, `project_name`, `project_type`, `short_desc`, `long_desc`) VALUES
 (1, 1, 1, 'LaurelEye', 'Web Application', 'An Uber of Tutorials', 'LaurelEye is an web-based platform where people can find other people willing to educate them in a vast array  of topics from academic subjects to arts and crafts.'),
-(2, 1, 2, 'Chibot', 'Mobile Application', 'Virtual Reality Listing app for Foreclosed Properties', 'The app focuses on Real Estate and Cars. The app can be deployed via major App stores (Apple App Store, Google Playstore). App also includes a VR walk-through of a Virtual Bank to familiarize customers of the different things you can do in a branch and also to promote the bank''s ongoing promos or marketing campaigns. The property viewer will contain a "dibs/I''m Interested" button that submits the user''s contact info, making it easier for the bank to contact new leads. This can help the bank increase its market reach faster. As for the users, this decreases guess work and logistics by cutting the need to go to the actual site just by experiencing the interactive photo-spheres and real-time 3D spaces that eventually speed up buyers''  decision to buy or not.'),
-(3, 1, 3, 'Intern', 'Web and Mobile Application', 'Amobile recording of traffic violations with banking payment. ', 'This app maintains the history of traffic violation records of a certain driver that has a account on the app while also recording the traffic enforcer info who arrested him/her. This app also provides digital banking for the driver that has been arrested. He/she can pay to Unionbank for his violation/s.');
+(2, 1, 2, 'uBid', 'Mobile Application', 'Virtual Reality Listing app for Foreclosed Properties', 'The app focuses on Real Estate and Cars. The app can be deployed via major App stores (Apple App Store, Google Playstore). App also includes a VR walk-through of a Virtual Bank to familiarize customers of the different things you can do in a branch and also to promote the bank''s ongoing promos or marketing campaigns. The property viewer will contain a "dibs/I''m Interested" button that submits the user''s contact info, making it easier for the bank to contact new leads. This can help the bank increase its market reach faster. As for the users, this decreases guess work and logistics by cutting the need to go to the actual site just by experiencing the interactive photo-spheres and real-time 3D spaces that eventually speed up buyers''  decision to buy or not.'),
+(3, 1, 3, 'Hooleh', 'Web and Mobile Application', 'Amobile recording of traffic violations with banking payment. ', 'This app maintains the history of traffic violation records of a certain driver that has a account on the app while also recording the traffic enforcer info who arrested him/her. This app also provides digital banking for the driver that has been arrested. He/she can pay to Unionbank for his violation/s.');
 
 -- --------------------------------------------------------
 
@@ -395,14 +458,14 @@ CREATE TABLE `scores` (
 --
 
 INSERT INTO `scores` (`score_id`, `judge_id`, `criteria_id`, `project_id`, `score`) VALUES
-(1, 1, 1, 1, 2),
-(2, 1, 2, 1, 5),
-(3, 1, 3, 1, 2),
-(4, 1, 4, 1, 12),
-(5, 2, 1, 1, 0),
-(6, 2, 2, 1, 0),
-(7, 2, 3, 1, 0),
-(8, 2, 4, 1, 0),
+(1, 1, 1, 1, 25),
+(2, 1, 2, 1, 25),
+(3, 1, 3, 1, 25),
+(4, 1, 4, 1, 25),
+(5, 2, 1, 1, 2),
+(6, 2, 2, 1, 2),
+(7, 2, 3, 1, 2),
+(8, 2, 4, 1, 2),
 (9, 3, 1, 1, 0),
 (10, 3, 2, 1, 0),
 (11, 3, 3, 1, 0),
@@ -455,14 +518,14 @@ INSERT INTO `scores` (`score_id`, `judge_id`, `criteria_id`, `project_id`, `scor
 (58, 15, 2, 1, 0),
 (59, 15, 3, 1, 0),
 (60, 15, 4, 1, 0),
-(61, 1, 1, 2, 2),
-(62, 1, 2, 2, 12),
-(63, 1, 3, 2, 20),
-(64, 1, 4, 2, 10),
+(61, 1, 1, 2, 0),
+(62, 1, 2, 2, 0),
+(63, 1, 3, 2, 0),
+(64, 1, 4, 2, 0),
 (65, 2, 1, 2, 0),
 (66, 2, 2, 2, 0),
 (67, 2, 3, 2, 0),
-(68, 2, 4, 2, 1),
+(68, 2, 4, 2, 0),
 (69, 3, 1, 2, 0),
 (70, 3, 2, 2, 0),
 (71, 3, 3, 2, 0),
@@ -515,10 +578,10 @@ INSERT INTO `scores` (`score_id`, `judge_id`, `criteria_id`, `project_id`, `scor
 (118, 15, 2, 2, 0),
 (119, 15, 3, 2, 0),
 (120, 15, 4, 2, 0),
-(121, 1, 1, 3, 10),
-(122, 1, 2, 3, 10),
-(123, 1, 3, 3, 20),
-(124, 1, 4, 3, 25),
+(121, 1, 1, 3, 0),
+(122, 1, 2, 3, 0),
+(123, 1, 3, 3, 0),
+(124, 1, 4, 3, 0),
 (125, 2, 1, 3, 0),
 (126, 2, 2, 3, 0),
 (127, 2, 3, 3, 0),
