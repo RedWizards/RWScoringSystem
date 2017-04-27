@@ -141,7 +141,7 @@ body {
 	transition: all 0.5s ease;
 	background-color: #D3610A;
 	color: white;
-	border: 2px solid #D3610A;
+	border: 1px solid #D3610A;
 	width: 20%;
 	padding: 0.5em;
 	font-size: 1em;
@@ -157,6 +157,10 @@ body {
 	background-color: #78298E;
 	border: 1px solid #78298E;
 	color: white;
+}
+
+textarea {
+	resize: none;
 }
 
 
