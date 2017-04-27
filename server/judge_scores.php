@@ -51,7 +51,7 @@
 	
 		<div class="row" id="judge-panel">
 		
-			<div class="col-md-3">
+			<div class="col-md-3" class="judges-list">
 				<h2 id="choose-judge-text">JUDGES</h2>
 				<ul class="nav nav-pills nav-stacked">
 					<!-- on ng click->toggle just pass the whole "judge" and set the active property to true -->
@@ -75,7 +75,7 @@
 
 				                            <div class="header">
 
-				                                <h1>{{judge.judge_name}}</h1>
+				                                <h1 class="judge-name">{{judge.judge_name}}</h1>
 
 				                            </div>
 
