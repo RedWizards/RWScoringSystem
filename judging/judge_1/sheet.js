@@ -14,9 +14,10 @@
 				url: sheet_url,
 				data:{
 					judge_id: 1,
-					event_id:1
+					event_id: 1
 				}
 			}).done(function(data) {
+				console.log(data);
 				$scope.teams = data;
 				$scope.$apply();
 			});

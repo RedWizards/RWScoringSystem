@@ -92,6 +92,12 @@ body {
 	padding: 0 2em;
 }
 
+#col-lbl {
+	height: 100%;
+	font-size: 3em;
+	padding-top: 1em;
+}
+
 #team-btn-list {
 	padding: 2em 3em;
 }

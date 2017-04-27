@@ -67,11 +67,11 @@
 									<div class="col-md-3 text-center">
 										<img class="img" style="width: 50%; height: 50%;" src="../../assets/images/logo2.png"/>
 									</div>
-									<div class="col-md-6">
-										<h1>{{team.team_name | uppercase}}</h1>
+									<div class="col-md-6" id="col-lbl">
+										<span>{{team.team_name | uppercase}}</span>
 									</div>
-									<div class="col-md-3 team-score">
-										<h1>{{team.total}} %</h1>
+									<div class="col-md-3 team-score" id="col-lbl">
+										<span><b>{{team.total}} %</b></span>
 									</div>
 								</div>
 							</button>
@@ -172,7 +172,7 @@
 										</div>
 												
 										<div class="col-md-4">
-											<h4><input type="number" class="text-right" name="criteria-{{criteria.criteria_id}}" style="width: 4em;" ng-model="criteria.score_details.score" ng-change="updateScore(team)" value="{{criteria.score_details.score}}"/><span> / {{criteria.criteria_weight}}</span></h4>
+											<h4><input type="number" class="text-right" name="criteria-{{criteria.criteria_id}}" max="25" min="0" style="width: 4em;" ng-model="criteria.score_details.score" ng-change="updateScore(team)" value="{{criteria.score_details.score}}"/><span> / {{criteria.criteria_weight}}</span></h4>
 										</div>
 										
 										<hr>
@@ -193,7 +193,7 @@
 									</div>
 									
 									<div class="col-md-4">
-										<h4>{{team.total}} %</h4>
+										<h2>{{team.total}} %</h2>
 									</div>
 									
 								</div>
