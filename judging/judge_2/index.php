@@ -58,7 +58,7 @@
 							<button class="btn team-btn" ng-click="setScore(team)">
 								<div class="row">
 									<div class="col-md-3 text-center">
-										<img class="img" style="width: 50%; height: 50%;" src="../../assets/images/logo2.png"/>
+										<img class="img" style="width: 50%; height: 50%;" src="../../assets/images/{{team.team_id}}.png"/>
 									</div>
 									<div class="col-md-6" id="col-lbl">
 										<span>{{team.team_name | uppercase}}</span>
