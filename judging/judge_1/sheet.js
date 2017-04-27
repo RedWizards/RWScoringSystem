@@ -25,7 +25,7 @@
 		init();
 
 		$scope.setScores = function(team){
-			var sheet_url= '../../assets/database/update_score.php';
+			var sheet_url= '../../database/update_score.php';
 			
 			var success = true;
 

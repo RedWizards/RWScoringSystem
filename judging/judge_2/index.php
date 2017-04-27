@@ -1,15 +1,17 @@
 <?php
+	
 	session_start();
 	$_SESSION['judge_id'] = 1; 
+	
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Scoring System</title>
-		<!--
-		<link rel="icon" href="images/icon.ico" type="image/png" sizes="32x32">
-		-->
+		<title>U:Hac Ultimate Pitching</title>
+		
+		<link rel="icon" href="../../assets/images/uhac.ico" type="image/ico" sizes="32x32">
+
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!-- Bootstrap -->
@@ -28,74 +30,96 @@
 		<script src="../../assets/js/bootstrap.min.js"></script>
 		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
-		<link rel="stylesheet" href="../../assets/css/scoring-system.css">
+		<link rel="stylesheet" href="../../assets/css/scoresheet.css">
 
 		<!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
 
 		<script src="../../assets/js/angular.min.js"></script>
+		
+		<script src="../../assets/js/angular-animate.js"></script>
 
-		<script src="../../assets/js/sheet.js"></script>	
+		<script src="sheet.js"></script>	
+		
 	</head>
 	
-	<body class="bgimg">
-		<header class="container">
-			<div class="row text-center">
+	<body>
+	<!--<div id="splash" onclick="closeSplash()">-->
+	<div id="div-body">
+		<header>
+			<div id="ename">
+			</div>
+			<div class="text-center" id="event-name">
 				<!-- Name of Event -->
-				<div class="row">
-					<h4 id="event-name">NAME OF EVENT</h4>
-				</div>
+				<span>U:HAC ULTIMATE PITCHING COMPETITION</span>
 			</div>
 		</header>
 		
-		<section class="container" ng-app="scoring-sheet" ng-controller="sheet-ctrl" ng-init="init()">
-		
-			<div id="events-record">
-			
+		<section ng-app="scoring-sheet" ng-controller="sheet-ctrl" ng-init="init()">
+			<div id="score-sheet">
+				
 				<div class="text-center" ng-repeat="team in teams">
+						
+					<div ng-hide="activeNow" id="list-team">
 					
-					<div ng-hide="activeNow" style="padding: 2em;">
-						<button class="btn team-btn" ng-click="setScore(team)">
-							<div class="row">
-								<div class="col-md-3 team-logo">
-									<img src="../../assets/images/logo.gif"/>
+						<div style="padding: 2em;">
+							<button class="btn team-btn" ng-click="setScore(team)">
+								<div class="row">
+									<div class="col-md-3 text-center">
+										<img class="img" style="width: 50%; height: 50%;" src="../../assets/images/logo2.png"/>
+									</div>
+									<div class="col-md-6">
+										<h1>{{team.team_name | uppercase}}</h1>
+									</div>
+									<div class="col-md-3 team-score">
+										<h1>{{team.total}} %</h1>
+									</div>
 								</div>
-								<div class="col-md-6">
-									<h3>{{team.team_name}}</h3>
-								</div>
-								<div class="col-md-3 team-score">
-									<h1>{{team.total}} %</h1>
-								</div>
-							</div>
-						</button>
+							</button>
+						</div>
+						
 					</div>
 					
-					<div ng-show="team.isActive">
 					
+					<div ng-show="team.isActive" id="team-board">
+					<!--
+					<div ng-if="team.isActive" id="team-board">
+					-->					
+						
 						<div class="row">
 							
-							<div class="col-md-6 text-left">
-								<button class="btn btn-nav" ng-click="closeTeam(team)">View All Teams</button>
+							<div class="col-md-12">
+								<button class="btn pull-left" ng-click="closeTeam(team)">View All Teams</button>
 							</div>
-							
+							<!--
 							<div class="col-md-6 text-right">
 								<button class="btn btn-nav" ng-click="prevTeam(team)">Previous</button>
 								<button class="btn btn-nav" ng-click="nextTeam(team)">Next</button>
 							</div>
-						
+							-->
 						</div>
+						
+						
+						<div class="row team-desc">
+							<span id="team-lbl"><small style="color:darkgray;">TEAM </small>{{team.team_name | uppercase}}</span>
+						</div>
+					
 					
 						<div class="row">
 						
 							<div class="col-md-6 sheet-div">
 							
 								<div id="team-desc">
-								
-									<div class="row team-desc">
-										<h3>{{team.team_name}}</h3>
+									
+									<div class="row proj-name">
+										<span>{{team.project_name}}</span>
 									</div>
 									
-									<div class="row team-desc">
-										<p>TEAM MEMBERS</p>
+									<div class="row long-desc text-justify">
+										<p>{{team.long_desc}}</p>
+									</div>
+									
+									<div class="row team-members text-left">
+										<p><b>DEVELOPERS</b></p>
 
 										<ul>
 											<!-- paayos nalang nito prince -->
@@ -103,14 +127,6 @@
 												{{member.participant_firstName}} {{member.participant_lastName}}
 											</li>
 										</ul>
-									</div>
-									
-									<div class="row team-desc">
-										<h4>{{team.project_name}}</h4>
-									</div>
-									
-									<div class="row team-desc">
-										<p>{{team.long_desc}}</p>
 									</div>
 								
 								</div>
@@ -184,13 +200,20 @@
 								
 								<br/><br/>
 								
+								
+								<div class="row">
+									<div class="col-md-12" id="remarks-row">
+										<textarea placeholder="Remarks" id="remarks" style="padding: 5px; width: 80%; height: 5em;"></textarea>
+									</div>
+								</div>
+								
 								<div class="row text-center container">
 								
 									<div class="col-md-2">
 									</div>
 								
 									<div class="col-md-6">
-										<button class="btn btn-lg btn-primary submit-score" ng-click="setScores(team.criteria)">SUBMIT</button>
+										<button class="btn btn-lg btn-primary submit-score" ng-click="setScores(team)">SUBMIT</button>
 									</div>
 									
 									<div class="col-md-2">
@@ -213,15 +236,21 @@
 					<button class="btn btn-primary">DONE</button>
 				</div>
 				-->
+				
+					</div>
+					
 			</div>
-			
 		</section>
-
-		<footer class="container text-center">
 		
-			<p><small>Powered by </small><strong>RED Wizard Events Management</strong> &copy; 2017</p>
-			
+		
+		<footer class="text-center">
+			<div id="foot">
+				<small>Powered by </small><strong>RED Wizard Events Management</strong> &copy; 2017
+			</div>
 		</footer>
+		
+		</div><!-- div-body -->
+		<!--</div>-->
 		
 	</body>
 
