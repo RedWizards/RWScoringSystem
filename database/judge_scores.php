@@ -67,11 +67,6 @@
 				    	unset($key);
 				    	unset($value);
 			    	}
-			    	$temp_criteria = array();
-			    	$temp_criteria['criteria_desc'] = 'Total';
-			    	$temp_criteria['score'] = $total;
-					array_push($criteria, $temp_criteria);
-
 			    	$team['criteria'] = $criteria;
 			    	array_push($teams, $team);
 			    }
