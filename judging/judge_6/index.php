@@ -215,11 +215,11 @@
 				
 				</div>
 				
-				<!--
-				<div id="done-style" class="text-center">
-					<button class="btn btn-primary">DONE</button>
+				
+				<div class="text-center" style="margin-bottom: 2em;" ng-hide="activeNow">
+					<a href="../out.php"><button id="done-btn">DONE</button></a>
 				</div>
-				-->
+				
 				
 					</div>
 					
