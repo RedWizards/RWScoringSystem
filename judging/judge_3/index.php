@@ -58,7 +58,7 @@
 							<button class="btn team-btn" ng-click="setScore(team)">
 								<div class="row">
 									<div class="col-md-3 text-center">
-										<img class="img" style="width: 50%; height: 50%;" src="../../assets/images/{{team.team_id}}.png"/>
+										<img class="img" id="team-logo" src="../../assets/images/{{team.team_id}}.png"/>
 									</div>
 									<div class="col-md-6" id="col-lbl">
 										<span>{{team.team_name | uppercase}}</span>
@@ -81,7 +81,7 @@
 						<div class="row">
 							
 							<div class="col-md-12">
-								<button class="view-btn pull-left" ng-click="closeTeam(team)">View All Teams</button>
+								<button class="view-btn pull-left" ng-click="closeTeam(team)"><span class="glyphicon glyphicon-chevron-left"></span> View All Teams</button>
 							</div>
 							<!--
 							<div class="col-md-6 text-right">
@@ -164,7 +164,7 @@
 											<small><i>{{criteria.criteria_longdesc}}</i></small>
 										</div>
 												
-										<div class="col-md-4">
+										<div class="col-md-4" style="padding: 1em 0 0 0;">
 											<h4><input type="number" class="text-right" name="criteria-{{criteria.criteria_id}}" placeholder="0" max="25" min="0" style="width: 4em;" ng-model="criteria.score_details.score" ng-change="updateScore(team)" value="{{criteria.score_details.score}}"/><span> / {{criteria.criteria_weight}}</span></h4>
 										</div>
 										
@@ -190,16 +190,16 @@
 									
 								</div>
 								
-								<br/><br/>
+								<br/>
 								
 								
-								<div class="row">
+								<!--<div class="row">
 									<div class="col-md-12" id="remarks-row">
 										<textarea placeholder="Remarks" id="remarks" style="padding: 5px; width: 80%; height: 5em;"></textarea>
 									</div>
 								</div>
-								
-								<div class="row" style="margin-top: 2em;">
+								-->
+								<div class="row" style="margin-top: 1em;">
 								
 										<button class="submit-score" ng-click="setScores(team)">SUBMIT</button>
 									
