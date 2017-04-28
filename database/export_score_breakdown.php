@@ -47,12 +47,12 @@
 			    {  
 			    	unset($row->project_id);
 			    	unset($row->team_id);
-			    	$row->
 
 			    	if ($first) {
-				        fputcsv($output, array_keys((array)$row));
+				        fputcsv($output, array_keys((array) $row));
 				        $first = false;
 				    }
+
 			        fputcsv($output, (array) $row);  
 			    }  
 			    fputcsv($output, ["",""]);
