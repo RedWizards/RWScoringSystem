@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 27, 2017 at 09:00 PM
+-- Generation Time: Apr 28, 2017 at 02:42 AM
 -- Server version: 5.6.26-log
 -- PHP Version: 7.0.4
 
@@ -200,7 +200,7 @@ INTO @sql FROM
     
 	SET @sql = (
 		CONCAT('
-			SELECT project_id, project_name AS "Project Name", team_id, team_name AS "Team Name",', @sql ,', (SELECT SUM(score) FROM scores WHERE judge_id = ',in_judge_id,' AND project_id = raw_scores.project_id) AS Total
+			SELECT project_id, project_name, team_id, team_name,', @sql ,', (SELECT SUM(score) FROM scores WHERE judge_id = ',in_judge_id,' AND project_id = raw_scores.project_id) AS Total
 			FROM
 				(
 					SELECT DISTINCT
@@ -458,14 +458,14 @@ CREATE TABLE `scores` (
 --
 
 INSERT INTO `scores` (`score_id`, `judge_id`, `criteria_id`, `project_id`, `score`) VALUES
-(1, 1, 1, 1, 25),
-(2, 1, 2, 1, 25),
-(3, 1, 3, 1, 25),
-(4, 1, 4, 1, 25),
-(5, 2, 1, 1, 2),
-(6, 2, 2, 1, 2),
-(7, 2, 3, 1, 2),
-(8, 2, 4, 1, 2),
+(1, 1, 1, 1, 0),
+(2, 1, 2, 1, 0),
+(3, 1, 3, 1, 0),
+(4, 1, 4, 1, 0),
+(5, 2, 1, 1, 0),
+(6, 2, 2, 1, 0),
+(7, 2, 3, 1, 0),
+(8, 2, 4, 1, 0),
 (9, 3, 1, 1, 0),
 (10, 3, 2, 1, 0),
 (11, 3, 3, 1, 0),

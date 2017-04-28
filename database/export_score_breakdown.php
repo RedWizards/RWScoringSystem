@@ -47,6 +47,7 @@
 			    {  
 			    	unset($row->project_id);
 			    	unset($row->team_id);
+			    	$row->
 
 			    	if ($first) {
 				        fputcsv($output, array_keys((array)$row));
@@ -60,8 +61,6 @@
 			    $conn->next_result();
 			}
 		}
-
-	    fclose($output); 
 
 	    header('Content-Type: text/csv; charset=utf-8');  
 	    header('Content-Disposition: attachment; filename=total_score_summary.csv');  

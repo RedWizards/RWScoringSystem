@@ -43,6 +43,8 @@
 			    	$team = array();
 			    	$criteria = array();
 			    	$total = 0;
+
+			    	
 			    	foreach($row as $key => $value){
 			    		switch($key){
 			    			case 'project_id':
