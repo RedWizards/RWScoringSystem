@@ -130,6 +130,10 @@ body {
 	font-size: 1.5em;
 }
 
+	#sheet-title {
+		display: none;
+	}
+
 
 #done-btn:hover {
 	background-color: white;
@@ -172,8 +176,9 @@ body {
 	background-color: #D3610A;
 	color: white;
 	border: 1px solid #D3610A;
-	width: 20%;
-	padding: 0.5em;
+	width: 50%;
+	padding: 1em;
+	margin: 0 0 2em 0;
 	font-size: 1em;
 }
 
@@ -257,7 +262,8 @@ textarea {
 
 #criteria {
 	margin-bottom: 2em;
-	padding: 1em;
+	padding: 0 3em;
+	font-size: 20px;
 }
 
 #score-title {
@@ -270,6 +276,10 @@ textarea {
 	margin: 0;
 	padding: 0;
 }
+
+	#cri-id {
+		display: none;
+	}
 
 @media only screen and (max-device-width : 360px) {
     
